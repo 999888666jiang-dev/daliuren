@@ -1,0 +1,316 @@
+{
+  "version": "2026-09-23.1",
+  "verificationMethod": "Visual comparison with actual scan; punctuation editorial. No OCR match automatically grants verified status.",
+  "pages": [
+    {
+      "path": "public/sources/daquan-v1-p11.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 11,
+      "sha256": "dee0e731d1996fae8879d581219b866c657ccaaf9d2fb7138b63250271dc38ab",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "十干寄宫、贼克摘句",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p12.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 12,
+      "sha256": "1147224a33bd0ec25e168f9cf3e71e82ff1ed7fcf159ca64f32949943e80c08f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "比用、涉害摘句",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p13.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 13,
+      "sha256": "8ad5277ae94fd58d424ae30be8c824fa1789854c9207b387f3f0194dceced2b8",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "遥克、昴星、别责前半",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p14.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 14,
+      "sha256": "9b2858b59090f72cdd185733c1ae234019d77c6aabda80961c1461da141192c7",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "别责后半、八专",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p15.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 15,
+      "sha256": "9117a22d5070611de1eb9f314a2a51538f16a162c3c934b5f002993572d6f2d9",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "伏吟、返吟及无克日期列表",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p16.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 16,
+      "sha256": "6359e712446a58e2cf2a383a36e30b68ea64489500e5675fd1539c68ae80f5c8",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit; total-qian cases additionally reviewed by rule_audit",
+      "reviewScope": "六甲总钤：甲辰干上未=寅未子",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p17.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 17,
+      "sha256": "a82d55fd102108ec1e45307a66b3d83ed1fbec2779a74974ce8caf1418c939bd",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit; total-qian cases additionally reviewed by rule_audit",
+      "reviewScope": "六乙总钤：乙卯干上申=未亥卯",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p19.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 19,
+      "sha256": "51b8f4ea9947ad45a4bb76ac0468a829746af177267c837d6d9935ce7f6f1117",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit; total-qian cases additionally reviewed by rule_audit",
+      "reviewScope": "六丁总钤：丁卯干上亥=未亥卯",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p21.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 21,
+      "sha256": "eba777d2b6101cca357ebec41a0f1762af4ddb8eebd4c56a7f05259fdec801a7",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit; total-qian cases additionally reviewed by rule_audit",
+      "reviewScope": "六己总钤：己卯及己亥干上亥=未亥卯",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v1-p23.jpg",
+      "sourceId": "daquan-v1",
+      "scanPage": 23,
+      "sha256": "7f7a09d74aadd6340a56de49330533bc144db86a9ca4969085e9552d95036b3f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit; total-qian cases additionally reviewed by rule_audit",
+      "reviewScope": "六辛总钤：辛卯干上寅=未亥卯",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p3.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 3,
+      "sha256": "368ab9598b3e636ee583c49185e8227aa51d37e5a059c91b054a4d63db720b92",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名1–10",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p4.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 4,
+      "sha256": "821722cc5292264b1130d4db3221d7bbce0a923e59ee468752f1653892e48fe4",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名11–26",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p5.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 5,
+      "sha256": "226f6c425b6df5e4c5ebb25c7cae02d3bbcae0c68a7ed6d716fef3315194e80f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名27–42，其中42字形待复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p6.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 6,
+      "sha256": "710f1eb50b692ba353173d97415927d173ecd3cf49d468bb2954e0526fd181d8",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名43–58，其中52字形待复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p7.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 7,
+      "sha256": "4657730bf0fc523f5acfce2ec453638f62ae3feb3309b028eddb99e7bac82a31",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名59–74，其中66字形待复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p8.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 8,
+      "sha256": "708d98c9d8e03face2ffcdac5e2cb781fabebfa2e8e6305a2b4f48ad041c9d65",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名75–90，其中84字形待复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p9.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 9,
+      "sha256": "27a9b93808f2a738b33e762f9bd33407a81f56dd92c4b9187edeca204fdfcc2f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "百法题名91–100",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p50.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 50,
+      "sha256": "1d70cbb68b3667eae28278bdff018a3995ca34adf222b922ba25d407feb03cd0",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第16条正文摘句及条件",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p102.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 102,
+      "sha256": "44740f96159e2f07d4a992b338613dc685dfc04d5362712a2b78f7e6a5b998f1",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第31条递生定义",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p103.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 103,
+      "sha256": "a0429287c444a6eb7a9854c5fb5444cfa9820bf6d84fa73c117651e9ef2dc6f9",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第31条空亡限制与年命填实上下文",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p104.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 104,
+      "sha256": "0a3fc7c24339423f8a4719009f5d05c061d708059413575458392f67d334cac0",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第31条续例上下文",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p105.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 105,
+      "sha256": "7f1ea796e4f77879d2ec5de3cb18c55a04a4042f1e822859e9c4cd85fc0edd2e",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第32条递克定义",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/daquan-v9-p106.jpg",
+      "sourceId": "daquan-v9",
+      "scanPage": 106,
+      "sha256": "3ab98d53004072a840e819d07e0ac4f1c3b29f163e43ea2c0faeca73d40d9572",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "第32条续例上下文",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/wyg-0808-p476.jpg",
+      "sourceId": "wyg-0808",
+      "scanPage": 476,
+      "sha256": "3530da9666220ed15512119e2c88c6914889d680895db27cfaa9cc67dddeaaf6",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "808-471卷首及提要版本核查",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/wyg-0808-p478.jpg",
+      "sourceId": "wyg-0808",
+      "scanPage": 478,
+      "sha256": "5fd9944e9123049146b7444ba036b4def7a1b2768f9fe0033d46e58408034bfc",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "808-473九宗门前半与CADAL摘句复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/wyg-0808-p479.jpg",
+      "sourceId": "wyg-0808",
+      "scanPage": 479,
+      "sha256": "47de383ce09e1163059d331142671a14dd5246fbd23de9d5ee1bb0ed1c99178c",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "808-474九宗门后半及六甲总钤复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/wyg-0808-p480.jpg",
+      "sourceId": "wyg-0808",
+      "scanPage": 480,
+      "sha256": "2ec3a0fa3360688503cd526025e75a1f888de9d239e9e40b23acd44ea9ac4d99",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "808-475六乙六丁总钤复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/wyg-0808-p481.jpg",
+      "sourceId": "wyg-0808",
+      "scanPage": 481,
+      "sha256": "c59455f1b5bf2fbde3919ab415406a47900e891b463bf0cc7e22211771095812",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "808-476六己六辛总钤复核",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/zhizhi-018.jpg",
+      "sourceId": "zhizhi",
+      "scanPage": 18,
+      "sha256": "12303c6cf5883e80118ff2609f2169c9c0307ad8c1fee49dc59262a3c3361ab2",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "昼夜贵人的时段；并发现贵人分表版本差异",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/zhizhi-019.jpg",
+      "sourceId": "zhizhi",
+      "scanPage": 19,
+      "sha256": "a978704216b1a4f8cdf3c82162583b8b54e55767e7d545d680567203d0cf7ebb",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "贵人顺逆与十二天将次序",
+      "scopeWarning": "Only the named passage or table cells were reviewed; not an assertion that the whole page or book is transcribed."
+    },
+    {
+      "path": "public/sources/cuiyan-041.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 41,
+      "sha256": "0d576dcf3f49f0110e4f81072836ab34fce7f3b8d552b2c9362324e8c6dcae6f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit and rule_audit, independent visual comparison",
+      "reviewScope": "左页卷一立课叶十九，逐干昼夜贵人表五句",
+      "scopeWarning": "Only these table sentences are verified; not the whole book."
+    }
+  ]
+}

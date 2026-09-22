@@ -1,0 +1,26 @@
+// Rounded city-centre coordinates, not the user's precise position. Manual / GPS overrides are available.
+// Place reference: GeoNames (CC BY), https://www.geonames.org/export/.
+export const cities = [
+  { name: "北京", longitude: 116.3972, latitude: 39.9075 },
+  { name: "上海", longitude: 121.4581, latitude: 31.2222 },
+  { name: "广州", longitude: 113.25, latitude: 23.1167 },
+  { name: "深圳", longitude: 114.0683, latitude: 22.5455 },
+  { name: "杭州", longitude: 120.1614, latitude: 30.2936 },
+  { name: "南京", longitude: 118.7778, latitude: 32.0617 },
+  { name: "成都", longitude: 104.0667, latitude: 30.6667 },
+  { name: "重庆", longitude: 106.5528, latitude: 29.5628 },
+  { name: "武汉", longitude: 114.2667, latitude: 30.5833 },
+  { name: "西安", longitude: 108.9286, latitude: 34.2583 },
+  { name: "长沙", longitude: 112.9709, latitude: 28.1987 },
+  { name: "郑州", longitude: 113.6486, latitude: 34.7578 },
+  { name: "济南", longitude: 116.9972, latitude: 36.6683 },
+  { name: "青岛", longitude: 120.3719, latitude: 36.0661 },
+  { name: "昆明", longitude: 102.7183, latitude: 25.0389 },
+  { name: "福州", longitude: 119.3061, latitude: 26.0614 },
+  { name: "厦门", longitude: 118.0789, latitude: 24.4798 },
+  { name: "沈阳", longitude: 123.4328, latitude: 41.7922 },
+  { name: "乌鲁木齐", longitude: 87.6005, latitude: 43.80096 },
+  { name: "拉萨", longitude: 91.1, latitude: 29.65 },
+  { name: "香港", longitude: 114.1577, latitude: 22.2855 },
+  { name: "台北", longitude: 121.5319, latitude: 25.0478 },
+];
