@@ -1,5 +1,7 @@
 # GitHub Pages 发布与浏览器直连解读
 
+> 当前新增 V3 通用据课解读，接口、请求限制、版本归档及迁移以 [V3 解读说明](reading-v3.md) 为准。本文下方 V2 格式和旧请求限制保留作历史兼容说明。
+
 目标网址：`https://999888666jiang-dev.github.io/daliuren/`。当前架构将静态页面发布到 GitHub Pages，由使用者的浏览器直接请求 DeepSeek 官方接口。排盘、规则条件检查、引文选择和报告处理都在本机浏览器完成。
 
 不需要 Cloudflare 账户、Worker、D1、邀请码或自建服务端；不存在应用层的全站每日配额。模拟测试、真实模型评估和生产浏览器检查分别记录，互不替代。实际验收结果统一记录在 [validation.md](validation.md)。

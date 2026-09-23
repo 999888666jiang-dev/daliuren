@@ -1,12 +1,16 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 import { readFile } from "node:fs/promises";
-import { assessRules } from "../../src/ai/assessments";
-import type {
-  IntentAssessment,
-  InterpretationV2,
-  RuleAssessment,
-} from "../../src/ai/types";
-import { selectEvidence } from "../../src/data/evidence";
+import type { IntentAssessment } from "../../src/ai/types";
+import type { ReadingContext } from "../../src/ai/reading-types";
+import { buildReadingContext } from "../../src/ai/reading-assessments";
+import {
+  type Body,
+  payload,
+  isIntent,
+  intent as fakeIntent,
+  interpretation,
+  reply,
+} from "./ai-fixtures";
 import type { Report } from "../../src/lib/report";
 
 // Every external request is blocked unless fulfilled by this test's local mock.
@@ -17,20 +21,14 @@ const question = "下周岗位面试怎么准备？这份合作合同应该先�
 const selectedQuestion = "这份合作合同应该先核查哪些条款？";
 const summary = "归档测试：核查合作条款与付款条件。";
 
-type Body = {
-  messages: { role: string; content: string }[];
-  max_tokens: number;
-};
 type InterpretationPayload = {
   intent: IntentAssessment;
   answers: Record<string, string>;
-  suppliedFacts: { id: string }[];
-  ruleAssessments: RuleAssessment[];
+  readingContext: ReadingContext;
 };
-const payload = (body: Body) => JSON.parse(body.messages.at(-1)!.content);
 const records = (page: Page): Promise<Report[]> =>
   page.evaluate(() =>
-    JSON.parse(localStorage.getItem("guanxiang.reports.v2") || "[]"),
+    JSON.parse(localStorage.getItem("guanxiang.reports.v3") || "[]"),
   );
 
 async function fill(page: Page, text: string, datetime = "2026-09-23T10:30") {
@@ -49,24 +47,6 @@ async function result(page: Page, expectedQuestion: string, id?: string) {
     expectedQuestion,
   );
   if (id) await expect(page).toHaveURL(new RegExp(`#/result/${id}$`));
-}
-async function reply(route: Route, answer: unknown) {
-  await route.fulfill({
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "authorization,content-type",
-    },
-    body: JSON.stringify({
-      choices: [
-        {
-          finish_reason: "stop",
-          message: { role: "assistant", content: JSON.stringify(answer) },
-        },
-      ],
-    }),
-  });
 }
 async function authorize(page: Page) {
   const field = page.getByLabel("DeepSeek API 密钥", { exact: true });
@@ -95,16 +75,18 @@ for (const clarify of [false, true]) {
   test(`async ${clarify ? "clarification" : "reclassification"} keeps the final intent, category, assessments and answer together`, async ({
     page,
   }, testInfo) => {
+    const asked = clarify ? question : "这次买入股份的计划值得推进吗？";
     const calls: Body[] = [];
     let held: { route: Route; body: Body } | undefined;
     await page.route(apiPattern, async (route) => {
       const body = route.request().postDataJSON() as Body;
       calls.push(body);
-      if (body.max_tokens !== 1200) {
+      if (!isIntent(body)) {
         held = { route, body };
         return;
       }
       const extracted: IntentAssessment = {
+        ...fakeIntent(body, clarify),
         category: clarify ? "career" : "business",
         coreQuestion: payload(body).question,
         subject: null,
@@ -129,9 +111,9 @@ for (const clarify of [false, true]) {
       await reply(route, extracted);
     });
 
-    await fill(page, question, "2026-01-02T20:30");
+    await fill(page, asked, "2026-01-02T20:30");
     await submit(page);
-    await result(page, question);
+    await result(page, asked);
     const original = (await records(page))[0];
     expect(original.category).toBe("general");
     await authorize(page);
@@ -155,44 +137,33 @@ for (const clarify of [false, true]) {
     expect(sent.intent.status).toBe("ready");
     expect(sent.answers).toEqual(clarify ? { scope: selectedQuestion } : {});
 
-    // Observe the intermediate saved update before allowing the async answer to finish.
-    // The old onUpdate closure would overwrite this state with the initial general category.
-    await expect
-      .poll(async () => (await records(page))[0].category)
-      .toBe("business");
+    // Understanding and source selection remain private draft state until all steps succeed.
     const intermediate = (await records(page))[0];
-    expect(intermediate.intent).toEqual(sent.intent);
-    const answer: InterpretationV2 = {
-      summary,
-      observations: [
-        {
-          kind: "context",
-          text: "合作条件需依据书面资料核实，可先逐项核对付款约定。",
-          factIds: [sent.suppliedFacts.find((f) => f.id === "method")!.id],
-          evidenceIds: [],
-          assessmentIds: [],
-        },
-      ],
-      advice: ["向对方确认书面付款条件。"],
-      missingInformation: ["双方是否已确认合同版本？"],
-      limitations: ["传统解释不能保证实际结果。"],
-    };
+    expect(intermediate).toEqual(original);
+    const answer = interpretation(held!.body, summary);
     await reply(held!.route, answer);
-    await expect(
-      page.locator("#ai-reading").getByText(summary, { exact: true }),
-    ).toBeVisible();
+    await expect(page.getByText(summary, { exact: true })).toBeVisible();
+    await expect(page.locator(".report-context")).toContainText(
+      sent.intent.meaning?.topicLabel.value ?? "交易合作",
+    );
     expect(calls).toHaveLength(2);
     const saved = (await records(page))[0];
     expect(saved.id).toBe(original.id);
     expect(saved.createdAt).toBe(original.createdAt);
-    expect(saved.category).toBe("business");
-    expect(saved.intent).toEqual(sent.intent);
-    expect(saved.clarificationAnswers).toEqual(sent.answers);
-    expect(saved.assessments).toEqual(assessRules(original.chart, "business"));
-    expect(saved.evidenceSnapshot).toEqual(
-      selectEvidence(original.chart, "business"),
+    expect(saved.category).toBe(original.category);
+    expect(saved.intent).toEqual(original.intent);
+    expect(saved.assessments).toEqual(original.assessments);
+    expect(saved.evidenceSnapshot).toEqual(original.evidenceSnapshot);
+    const revision = saved.readingRevisions!.find(
+      (r) => r.id === saved.activeReadingId,
+    )!;
+    expect(revision.intent).toEqual(sent.intent);
+    expect(revision.intent.category).toBe("business");
+    expect(revision.answers).toEqual(sent.answers);
+    expect(revision.context).toEqual(
+      buildReadingContext(original.chart, "business"),
     );
-    expect(saved.interpretation).toEqual(answer);
+    expect(revision.interpretation).toEqual(answer);
     expect(saved.chart).toEqual(original.chart);
 
     const downloadPromise = page.waitForEvent("download");
@@ -204,10 +175,8 @@ for (const clarify of [false, true]) {
     expect(serialized).not.toContain(fakeKey);
     expect(JSON.parse(serialized)).toEqual(saved);
     await page.reload();
-    await result(page, question, original.id);
-    await expect(
-      page.locator("#ai-reading").getByText(summary, { exact: true }),
-    ).toBeVisible();
+    await result(page, asked, original.id);
+    await expect(page.getByText(summary, { exact: true })).toBeVisible();
     expect((await records(page))[0]).toEqual(saved);
   });
 }

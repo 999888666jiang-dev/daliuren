@@ -29,6 +29,12 @@ import {
   validateInterpretation,
 } from "../ai/validation";
 import type { Report } from "./report";
+import type { ReadingRevision } from "./reading-report";
+import {
+  validateReading,
+  validateReadingContext,
+} from "../ai/reading-validation";
+import { validateMeaning } from "../ai/meaning";
 
 export const redactReportSecrets = (value: string): string =>
   value.replace(/\bsk-[A-Za-z0-9_-]+/giu, "[已移除密钥]");
@@ -346,10 +352,14 @@ function answers(value: unknown): Record<string, string> {
   const result: Record<string, string> = {};
   for (const id of ["scope", "category", "object"])
     if (v[id] !== undefined) result[id] = text(v[id], 500, 1);
-  if (Object.keys(result).length > 2) fail();
+  if (Object.keys(result).length > 3) fail();
   return result;
 }
-function projectIntent(value: unknown): IntentAssessment {
+function projectIntent(
+  value: unknown,
+  question = "",
+  supplied: Record<string, string> = {},
+): IntentAssessment {
   const v = record(value);
   return {
     category: oneOf(v.category, CATEGORIES),
@@ -363,6 +373,9 @@ function projectIntent(value: unknown): IntentAssessment {
     categoryReason: text(v.categoryReason, 300, 1),
     status: oneOf(v.status, ["ready", "needs_clarification"]),
     source: oneOf(v.source, ["local", "model"]),
+    ...(v.meaning !== undefined
+      ? { meaning: validateMeaning(v.meaning, { question, answers: supplied }) }
+      : {}),
     clarifications: array(v.clarifications, 2).map((item) => {
       const c = record(item);
       return {
@@ -464,8 +477,16 @@ function aiMeta(value: unknown): Record<string, string> {
 /** Projects only known fields. Invalid optional AI data never destroys a valid chart. */
 export function normalizeReport(value: unknown): Report | null {
   try {
-    const v = record(value);
-    if (v.schemaVersion !== 1 && v.schemaVersion !== 2) return null;
+    // Redact before validating provenance so quoted source spans and values stay aligned.
+    const v = record(
+      JSON.parse(
+        JSON.stringify(value, (_key, item) =>
+          typeof item === "string" ? redactReportSecrets(item) : item,
+        ),
+      ),
+    );
+    if (v.schemaVersion !== 1 && v.schemaVersion !== 2 && v.schemaVersion !== 3)
+      return null;
     const chart = projectChart(v.chart);
     const createdAt = date(v.createdAt, true);
     const category = oneOf(v.category, CATEGORIES);
@@ -478,7 +499,7 @@ export function normalizeReport(value: unknown): Report | null {
       }
     }
     const result: Report = {
-      schemaVersion: 2,
+      schemaVersion: v.schemaVersion === 3 ? 3 : 2,
       id:
         v.schemaVersion === 1
           ? `legacy-${chart.id}-${createdAt}`
@@ -558,14 +579,21 @@ export function normalizeReport(value: unknown): Report | null {
     }
     if (v.intent !== undefined) {
       try {
-        const projected = projectIntent(v.intent);
+        const projected = projectIntent(
+          v.intent,
+          result.question,
+          result.clarificationAnswers,
+        );
         if (projected.category !== category) fail();
         const source = [
           result.question,
           ...Object.values(result.clarificationAnswers ?? {}),
         ].join("\n");
-        if (source.length > 2400) fail();
-        result.intent = validateIntent(projected, source, projected.category);
+        if (source.length > 3000) fail();
+        result.intent = validateIntent(projected, source, projected.category, {
+          question: result.question,
+          answers: result.clarificationAnswers,
+        });
       } catch {
         warnings.push("问题整理结果未通过校验，已保留原问题。");
       }
@@ -591,7 +619,7 @@ export function normalizeReport(value: unknown): Report | null {
         warnings.push("旧版解读损坏或引用无法复核，已移除解读并保留课盘。");
       }
     }
-    if (v.schemaVersion === 2 && v.interpretation !== undefined) {
+    if (v.schemaVersion !== 1 && v.interpretation !== undefined) {
       try {
         result.interpretation = validateInterpretation(
           interpretationShape(v.interpretation, true),
@@ -608,6 +636,92 @@ export function normalizeReport(value: unknown): Report | null {
         result.aiMeta = aiMeta(v.aiMeta);
       } catch {
         warnings.push("模型版本记录损坏，已忽略。");
+      }
+    }
+    if (v.schemaVersion === 3) {
+      result.readingRevisions = [];
+      if (v.readingRevisions !== undefined) {
+        try {
+          for (const item of array(v.readingRevisions, 100)) {
+            try {
+              const r = record(item);
+              const revisionId = text(r.id, 200, 1);
+              if (
+                result.readingRevisions.some((saved) => saved.id === revisionId)
+              )
+                fail();
+              const supplied = answers(r.answers);
+              const intent = projectIntent(r.intent, result.question, supplied);
+              validateIntent(
+                intent,
+                [result.question, ...Object.values(supplied)].join("\n"),
+                intent.category,
+                { question: result.question, answers: supplied },
+              );
+              const context = validateReadingContext(r.context, chart);
+              const interpretation = validateReading(
+                r.interpretation,
+                context,
+                chart,
+              );
+              const meta = record(r.meta);
+              const askedAt = date(r.questionAskedAt, true);
+              if (askedAt !== result.createdAt) fail();
+              const created = date(r.createdAt, true);
+              const revision: ReadingRevision = {
+                id: revisionId,
+                createdAt: created,
+                questionAskedAt: askedAt,
+                intent,
+                answers: supplied,
+                context,
+                interpretation,
+                meta: {
+                  model: text(meta.model, 100, 1),
+                  promptVersion: text(meta.promptVersion, 100, 1),
+                  intentVersion: text(meta.intentVersion, 100, 1),
+                  engineVersion: text(meta.engineVersion, 100, 1),
+                  ruleVersion: text(meta.ruleVersion, 100, 1),
+                  corpusVersion: text(meta.corpusVersion, 100, 1),
+                  generatedAt: date(meta.generatedAt, true),
+                  readingVersion: text(meta.readingVersion, 100, 1),
+                  assessmentVersion: text(meta.assessmentVersion, 100, 1),
+                  questionAskedAt: date(meta.questionAskedAt, true),
+                },
+              };
+              if (
+                revision.meta.questionAskedAt !== askedAt ||
+                revision.meta.engineVersion !== chart.engineVersion ||
+                revision.meta.ruleVersion !== chart.ruleVersion ||
+                revision.meta.corpusVersion !== context.version ||
+                revision.meta.assessmentVersion !== context.version ||
+                revision.meta.generatedAt !== created
+              )
+                fail();
+              result.readingRevisions.push(revision);
+            } catch {
+              warnings.push("一版解读记录损坏，已隔离；原课盘与其余解读保留。");
+            }
+          }
+        } catch {
+          warnings.push("解读版本列表损坏，原课盘保留。");
+        }
+      }
+      try {
+        result.activeReadingId =
+          v.activeReadingId === null || v.activeReadingId === undefined
+            ? null
+            : text(v.activeReadingId, 200, 1);
+      } catch {
+        result.activeReadingId = result.readingRevisions.at(-1)?.id ?? null;
+        warnings.push("解读版本选择记录损坏，已回到最近可读版本。");
+      }
+      if (
+        result.activeReadingId &&
+        !result.readingRevisions.some((r) => r.id === result.activeReadingId)
+      ) {
+        result.activeReadingId = result.readingRevisions.at(-1)?.id ?? null;
+        warnings.push("选中的解读版本不可读，已回到最近可读版本。");
       }
     }
     if (warnings.length) result.warnings = [...new Set(warnings)].slice(0, 40);

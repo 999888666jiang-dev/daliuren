@@ -1,5 +1,28 @@
 import { CORPUS_VERSION } from "../data/evidence";
-import { normalizeIntentExtraction } from "./intent-normalization";
+import {
+  normalizeIntentExtraction,
+  normalizeIntentV3Extraction,
+} from "./intent-normalization";
+import {
+  createIntentMessagesV3,
+  INTENT_PROMPT_VERSION_V3,
+} from "./prompts-intent";
+import { INTENT_VERSION } from "./intent";
+import {
+  createReadingMessages,
+  READING_PROMPT_VERSION,
+} from "./prompts-reading";
+import {
+  READING_VERSION,
+  normalizeReadingResponse,
+  validateReading,
+  validateReadingContext,
+} from "./reading-validation";
+import type {
+  InterpretationV3,
+  ReadingMeta,
+  ReadingRequest,
+} from "./reading-types";
 import type {
   AiMeta,
   IntentAssessment,
@@ -44,9 +67,10 @@ function checkedKey(key: string) {
 async function boundedJson(
   response: Response,
   signal: AbortSignal,
+  responseLimit = RESPONSE_LIMIT,
 ): Promise<unknown> {
   const declared = response.headers.get("Content-Length");
-  if (declared && Number(declared) > RESPONSE_LIMIT) {
+  if (declared && Number(declared) > responseLimit) {
     void response.body?.cancel().catch(() => undefined);
     throw new AiClientError(
       "RESPONSE_TOO_LARGE",
@@ -71,7 +95,7 @@ async function boundedJson(
         throw new AiClientError("ABORTED", "已取消本次请求。");
       if (chunk.done) break;
       bytes += chunk.value.byteLength;
-      if (bytes > RESPONSE_LIMIT) {
+      if (bytes > responseLimit) {
         cancel();
         throw new AiClientError(
           "RESPONSE_TOO_LARGE",
@@ -124,6 +148,7 @@ async function completion(
   timeout: number,
   maxTokens: number,
   signal?: AbortSignal,
+  options?: { reasoningEffort?: "low"; responseLimit?: number },
 ): Promise<unknown> {
   const key = checkedKey(apiKey);
   if (signal?.aborted) throw new AiClientError("ABORTED", "已取消本次请求。");
@@ -166,7 +191,10 @@ async function completion(
         model: AI_MODEL,
         messages,
         response_format: { type: "json_object" },
-        thinking: { type: "disabled" },
+        thinking: { type: options?.reasoningEffort ? "enabled" : "disabled" },
+        ...(options?.reasoningEffort
+          ? { reasoning_effort: options.reasoningEffort }
+          : {}),
         max_tokens: maxTokens,
         temperature: 0.2,
         stream: false,
@@ -176,7 +204,11 @@ async function completion(
       void response.body?.cancel().catch(() => undefined);
       throw httpError(response.status);
     }
-    const envelope = await boundedJson(response, controller.signal);
+    const envelope = await boundedJson(
+      response,
+      controller.signal,
+      options?.responseLimit,
+    );
     if (
       !isRecord(envelope) ||
       !Array.isArray(envelope.choices) ||
@@ -319,6 +351,115 @@ export async function requestInterpretation(
       ruleVersion: request.chart.ruleVersion,
       corpusVersion: CORPUS_VERSION,
       generatedAt: new Date().toISOString(),
+    },
+  };
+}
+
+function checkedAnswers(value: unknown): Record<string, string> {
+  if (
+    !isRecord(value) ||
+    Object.keys(value).length > 3 ||
+    Object.entries(value).some(
+      ([id, answer]) =>
+        !CLARIFICATION_IDS.includes(id as (typeof CLARIFICATION_IDS)[number]) ||
+        !validText(answer, 1, 500),
+    )
+  ) {
+    throw new AiClientError(
+      "INVALID_REQUEST",
+      "问题澄清信息无效，请检查填写内容。",
+    );
+  }
+  return Object.fromEntries(Object.entries(value)) as Record<string, string>;
+}
+
+/** One understanding request. Optional corrections retain their own answer provenance. */
+export async function requestIntentV3(
+  request: IntentRequest & { answers?: Record<string, string> },
+): Promise<IntentAssessment> {
+  validateQuestion(request.question, request.categoryChoice);
+  const answers = checkedAnswers(request.answers ?? {});
+  const value = await completion(
+    request.apiKey,
+    createIntentMessagesV3({ ...request, answers }),
+    25_000,
+    3500,
+    request.signal,
+  );
+  const result = normalizeIntentV3Extraction(
+    value,
+    request.question,
+    request.categoryChoice,
+    answers,
+  );
+  if (result.source !== "model")
+    throw new AiClientError(
+      "INVALID_INTENT",
+      "问题整理来源不符合预期，请手动确认。",
+    );
+  return result;
+}
+
+/** One reading request; failures never mutate the caller's stored report or trigger a retry. */
+export async function requestReading(
+  request: ReadingRequest,
+): Promise<{ interpretation: InterpretationV3; meta: ReadingMeta }> {
+  validateQuestion(request.question, request.intent.category);
+  const answers = checkedAnswers(request.answers);
+  if (
+    typeof request.questionAskedAt !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/u.test(
+      request.questionAskedAt,
+    ) ||
+    !Number.isFinite(Date.parse(request.questionAskedAt)) ||
+    (request.consultationMode !== undefined &&
+      !["standard", "living", "reuse", "manual"].includes(
+        request.consultationMode,
+      ))
+  ) {
+    throw new AiClientError(
+      "INVALID_REQUEST",
+      "原问时间或续占方式无效，未开始解读。",
+    );
+  }
+  const intent = validateIntent(
+    request.intent,
+    [request.question, ...Object.values(answers)].join("\n"),
+    request.intent.category,
+    { question: request.question, answers },
+  );
+  if (intent.status !== "ready")
+    throw new AiClientError(
+      "INVALID_INTENT",
+      "请先确认当前所问事项，再生成解读。",
+    );
+  const context = validateReadingContext(request.context, request.chart);
+  const value = await completion(
+    request.apiKey,
+    createReadingMessages({ ...request, intent, answers, context }),
+    120_000,
+    24_000,
+    request.signal,
+    { reasoningEffort: "low", responseLimit: 192_000 },
+  );
+  return {
+    interpretation: validateReading(
+      normalizeReadingResponse(value),
+      context,
+      request.chart,
+    ),
+    meta: {
+      model: AI_MODEL,
+      promptVersion: READING_PROMPT_VERSION,
+      intentVersion:
+        intent.source === "local" ? INTENT_VERSION : INTENT_PROMPT_VERSION_V3,
+      engineVersion: request.chart.engineVersion,
+      ruleVersion: request.chart.ruleVersion,
+      corpusVersion: context.version,
+      generatedAt: new Date().toISOString(),
+      readingVersion: READING_VERSION,
+      assessmentVersion: context.version,
+      questionAskedAt: request.questionAskedAt,
     },
   };
 }

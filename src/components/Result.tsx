@@ -7,8 +7,8 @@ import {
   Download,
   Printer,
 } from "lucide-react";
-import { ENGINE_VERSION, RULE_VERSION } from "../core";
-import { CORPUS_VERSION, matchBifa } from "../data/evidence";
+import { ENGINE_VERSION } from "../core";
+import { matchBifa } from "../data/evidence";
 import {
   categories,
   exportReport,
@@ -18,9 +18,9 @@ import {
 } from "../lib/report";
 import { Plate } from "./Plate";
 import { Evidence } from "./Evidence";
-import { AiReading } from "./AiReading";
+import { Reading as AiReading } from "./Reading";
 import { ContinueQuestion, type ContinueInput } from "./ContinueQuestion";
-import { QuestionGuide } from "./QuestionGuide";
+import { activeReading, canInterpretChart } from "../lib/reading-report";
 export function Result({
   report,
   onUpdate,
@@ -33,6 +33,7 @@ export function Result({
   reports: Report[];
 }) {
   const { chart } = report;
+  const reading = activeReading(report);
   const priority = (r: { id: string; ruleIds: string[] }) =>
     r.id.startsWith("bifa-")
       ? 0
@@ -69,11 +70,7 @@ export function Result({
         report.comparison.transmissions.map((t) => t.branch),
         report.comparison.daytime,
       ]);
-  const currentVersion =
-    chart.engineVersion === ENGINE_VERSION &&
-    chart.ruleVersion === RULE_VERSION &&
-    report.corpusVersion === CORPUS_VERSION &&
-    Array.isArray(report.evidenceSnapshot);
+  const currentVersion = canInterpretChart(report);
   return (
     <div className="result-page page-width">
       <div className="result-header">
@@ -121,7 +118,12 @@ export function Result({
                 ? "古课复核"
                 : "正时起课"}
         </span>
-        <span>{categories.find((c) => c.id === report.category)?.long}</span>
+        <span>
+          {reading?.intent.meaning?.topicLabel.value ??
+            categories.find(
+              (c) => c.id === (reading?.intent.category ?? report.category),
+            )?.long}
+        </span>
         <span>
           {chart.time
             ? timeText(chart.time.beijing) + " · 北京时间"
@@ -162,13 +164,17 @@ export function Result({
         </p>
       ))}
       <section className="answer-brief">
-        {report.interpretation ? (
+        {reading ? (
           <>
-            <span className="section-eyebrow">本次简答 · AI 现代解读</span>
-            <p>{report.interpretation.summary}</p>
+            <span className="section-eyebrow">本次简断 · 据课推演</span>
+            <p>{reading.interpretation.summary}</p>
           </>
         ) : (
-          <p>课盘已生成。可继续结合具体问题解读，并逐条核对古籍依据。</p>
+          <p>
+            {report.interpretation || report.legacyInterpretation
+              ? "这份课盘已有历史解读，可沿原盘更新为逐句推演。"
+              : "课盘已生成。下方查看原盘，并生成针对本问的取用与推演。"}
+          </p>
         )}
         <button
           className="outline-button no-print"
@@ -178,12 +184,20 @@ export function Result({
             node?.focus({ preventScroll: true });
           }}
         >
-          {report.interpretation ? "查看详细解释" : "解读当前问题"}
+          {reading ? "查看详细解释" : "解读当前问题"}
         </button>
       </section>
       <ContinueQuestion reports={reports} onContinue={onContinue} />
       <div className="result-grid">
         <aside className="chart-column">
+          <h2 className="raw-chart-title">原始排盘结果</h2>
+          <p className="raw-chart-summary">
+            {chart.day.stem}
+            {chart.day.branch}日 · {chart.monthGeneral}将加{chart.hourBranch}时
+            <br />
+            {chart.method.name} ·{" "}
+            {chart.transmissions.map((t) => t.branch).join(" → ")}
+          </p>
           <Plate chart={chart} compact />
           <div className="chart-overview">
             <span>
@@ -257,6 +271,11 @@ export function Result({
                     name: "天将",
                     value: (i: number) => chart.transmissions[i].general,
                   },
+                  {
+                    name: "旬空",
+                    value: (i: number) =>
+                      chart.transmissions[i].isVoid ? "旬空" : "不空",
+                  },
                 ].map((row) => (
                   <tr key={row.name}>
                     <th>{row.name}</th>
@@ -295,7 +314,15 @@ export function Result({
           </details>
         </aside>
         <div className="reading-column">
-          <section className="reading-section">
+          <AiReading
+            report={report}
+            currentVersion={currentVersion}
+            onUpdate={onUpdate}
+          />
+          <details className="fold-section">
+            <summary>
+              排盘与历史引文备查 <ChevronDown size={16} />
+            </summary>
             <div className="section-heading">
               <h2>古籍原文与依据</h2>
               <a href="#/sources">查阅典籍 ↗</a>
@@ -320,19 +347,7 @@ export function Result({
                 本课暂未匹配到已核引文，不使用待校文字补齐。
               </p>
             )}
-          </section>
-          {currentVersion && (
-            <QuestionGuide
-              chart={chart}
-              question={report.question}
-              category={report.category}
-            />
-          )}
-          <AiReading
-            report={report}
-            currentVersion={currentVersion}
-            onUpdate={onUpdate}
-          />
+          </details>
           {chart.time && (
             <details
               className="fold-section"
@@ -439,7 +454,7 @@ export function Result({
       </div>
       <p className="report-footer">
         课号 {chart.id} · 引擎 {chart.engineVersion} · 规则 {chart.ruleVersion}{" "}
-        · 文献 {report.corpusVersion || "未记录"}
+        · 文献 {reading?.context.version ?? report.corpusVersion ?? "未记录"}
       </p>
     </div>
   );

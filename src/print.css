@@ -103,4 +103,28 @@
   .report-footer {
     font-size: 9px !important;
   }
+  .ai-section {
+    break-inside: auto;
+  }
+  .reasoning-card,
+  .reading-focus,
+  .reading-advice > li {
+    break-inside: avoid;
+  }
+  .reading-facts dt,
+  .reading-facts dd,
+  .reading-quote figcaption,
+  .reading-quote blockquote,
+  .reading-explanation > span,
+  .reading-application > span,
+  .contribution,
+  .reasoning-number,
+  .reading-v3 h4,
+  .meaning-origins {
+    color: #222 !important;
+  }
+  .reading-quote,
+  .reading-synthesis {
+    border-color: #888 !important;
+  }
 }

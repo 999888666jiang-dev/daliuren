@@ -2612,6 +2612,182 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   min-height: 44px;
   margin-top: 12px;
 }
+.raw-chart-title {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.raw-chart-summary {
+  color: var(--gold);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.reading-version-select {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.reading-version-select select {
+  max-width: 100%;
+  min-width: 0;
+  padding: 9px;
+}
+.reading-v3 h4 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.reading-focus {
+  padding: 18px 0;
+}
+.reasoning-card {
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 90px;
+}
+.reasoning-heading {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.reasoning-heading h4 {
+  flex: 1;
+  min-width: 120px;
+}
+.reasoning-number {
+  color: var(--gold);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.contribution {
+  color: var(--muted);
+  font-size: 12px;
+}
+.contribution.supports {
+  color: #b9c5a0;
+}
+.contribution.opposes {
+  color: #d1ae91;
+}
+.reading-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 18px 0;
+}
+.reading-facts div {
+  min-width: 0;
+}
+.reading-facts dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+.reading-facts dd {
+  margin: 5px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.reading-quote {
+  margin: 15px 0;
+  padding: 16px 18px;
+  background: rgba(197, 173, 129, 0.045);
+  border-left: 2px solid var(--gold);
+}
+.reading-quote blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--gold);
+}
+.reading-quote figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.reading-quote a {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--gold);
+}
+.reading-explanation > span,
+.reading-application > span {
+  font-size: 13px;
+  color: var(--gold);
+}
+.reading-explanation p,
+.reading-application p {
+  margin-top: 8px;
+}
+.reading-application {
+  padding-top: 8px;
+}
+.reading-synthesis {
+  border-left: 2px solid var(--gold);
+  padding-left: 20px;
+}
+.reading-advice {
+  padding-left: 24px;
+}
+.reading-advice > li {
+  padding: 12px 0;
+}
+.reading-advice strong {
+  font-weight: 500;
+}
+.reading-advice p {
+  margin: 7px 0;
+  color: var(--muted);
+}
+.reading-advice .text-button {
+  font-size: 12px;
+  text-align: left;
+}
+.meaning-origins {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 16px;
+}
+.meaning-origins summary {
+  cursor: pointer;
+  color: var(--gold);
+}
+.meaning-origins p {
+  font-size: 13px;
+  margin: 8px 0;
+}
+.ai-controls textarea {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 16px;
+}
+@media (max-width: 600px) {
+  .reading-facts {
+    grid-template-columns: 1fr;
+  }
+  .reading-facts > div {
+    display: grid;
+    grid-template-columns: 5.5em minmax(0, 1fr);
+    align-items: baseline;
+    gap: 12px;
+  }
+  .reading-facts dd {
+    margin-top: 0;
+  }
+  .reading-quote {
+    padding: 12px;
+  }
+  .reading-v3 h4 {
+    font-size: 19px;
+  }
+}
 .loading-icon {
   animation: interpretation-spin 1.5s linear infinite;
 }

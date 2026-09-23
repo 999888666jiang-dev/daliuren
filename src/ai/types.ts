@@ -1,4 +1,5 @@
 import type { Category, ChartResult, EvidenceRecord } from "../core/types";
+import type { IntentMeaning } from "./meaning";
 
 export type CategoryChoice = Category | "auto";
 export interface Clarification {
@@ -19,6 +20,7 @@ export interface IntentAssessment {
   categoryReason: string;
   status: "ready" | "needs_clarification";
   source: "model" | "local";
+  meaning?: IntentMeaning;
 }
 export type AssessmentStatus = "met" | "not_met" | "unknown" | "not_applicable";
 export interface RuleAssessment {

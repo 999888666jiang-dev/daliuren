@@ -1,5 +1,13 @@
 import { expect, test, type Page, type Route } from "@playwright/test";
 import { readFile } from "node:fs/promises";
+import {
+  type Body,
+  payload,
+  isIntent,
+  intent,
+  interpretation,
+  reply,
+} from "./ai-fixtures";
 
 // Entirely isolated fake credentials and DeepSeek responses. No paid API calls.
 const key = "sk-e2e-only-never-a-live-credential";
@@ -7,94 +15,21 @@ const updatedKey = "sk-e2e-updated-never-a-live-credential";
 const originalQuestion = "下个月如何核查新的工作机会和岗位条件？";
 const apiPattern = "https://api.deepseek.com/**";
 const runtimeErrors = new WeakMap<Page, string[]>();
-type Body = {
-  messages: { role: string; content: string }[];
-  max_tokens: number;
-};
-const payload = (body: Body) => JSON.parse(body.messages.at(-1)!.content);
-const isIntent = (body: Body) => body.max_tokens === 1200;
-function intent(body: Body, clarify = false) {
-  const data = payload(body);
-  return {
-    category: data.categoryChoice === "auto" ? "career" : data.categoryChoice,
-    coreQuestion: data.question.slice(0, 120),
-    subject: null,
-    object: null,
-    goal: null,
-    timeframe: null,
-    background: [],
-    missingInformation: [],
-    categoryReason: "隔离测试：问题涉及岗位信息。",
-    clarifications: clarify
-      ? [
-          {
-            id: "scope",
-            question: "这次先核查哪一件事？",
-            options: ["如何核查新岗位条件？", "如何安排出行？"],
-          },
-        ]
-      : [],
-    status: clarify ? "needs_clarification" : "ready",
-    source: "model",
-  };
-}
-function interpretation(
-  body: Body,
-  summary = "隔离测试回答：先核查具体岗位条件。",
-) {
-  const data = payload(body);
-  // Use a real supplied fact ID; never fabricate a chart or traditional citation.
-  const fact =
-    data.suppliedFacts.find((item: { id: string }) => item.id === "method") ??
-    data.suppliedFacts[0];
-  return {
-    summary,
-    observations: [
-      {
-        kind: "context",
-        text: "岗位是否适合还需现实信息，先核对书面条件。",
-        factIds: [fact.id],
-        evidenceIds: [],
-        assessmentIds: [],
-      },
-    ],
-    advice: ["向对方索取书面职责和待遇条件。"],
-    missingInformation: ["目前是否已有正式邀约？"],
-    limitations: ["传统解释不能保证实际结果。"],
-  };
-}
-async function reply(route: Route, answer: unknown) {
-  await route
-    .fulfill({
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "authorization,content-type",
-      },
-      body: JSON.stringify({
-        choices: [
-          {
-            finish_reason: "stop",
-            message: { role: "assistant", content: JSON.stringify(answer) },
-          },
-        ],
-      }),
-    })
-    .catch(() => undefined); // A deliberately cancelled browser request can no longer be fulfilled.
-}
 async function cast(page: Page, question = originalQuestion) {
   await page.goto("./");
   const existing = await page
     .evaluate((q) => {
       const saved = JSON.parse(
-        localStorage.getItem("guanxiang.reports.v2") || "[]",
+        localStorage.getItem("guanxiang.reports.v3") || "[]",
       );
       return saved.some((r: { question: string }) => r.question === q);
     }, question)
     .catch(() => false);
   if (existing) {
-    await page.goto("./#/history");
+    await page
+      .getByRole("navigation")
+      .getByRole("link", { name: "本机记录", exact: true })
+      .click();
     await page
       .getByRole("button", { name: question, exact: true })
       .first()
@@ -223,10 +158,17 @@ test("valid two-stage answer uses supplied facts and report export never include
   await page.getByRole("button", { name: "保存到此设备", exact: true }).click();
   await page.getByRole("button", { name: "生成 AI 解读", exact: true }).click();
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：先核查具体岗位条件。", { exact: true }),
+    page.getByText("隔离测试回答：按所引传统原则合看支持与限制。", {
+      exact: true,
+    }),
   ).toBeVisible();
+  await expect(
+    page.locator("#ai-reading .reading-quote").first(),
+  ).toBeVisible();
+  await page.screenshot({
+    path: testInfo.outputPath("desktop-v3-reading.png"),
+    fullPage: true,
+  });
   expect(calls).toHaveLength(2);
   await page.getByRole("button", { name: "保存到本机", exact: true }).click();
   const downloadPromise = page.waitForEvent("download");
@@ -238,8 +180,21 @@ test("valid two-stage answer uses supplied facts and report export never include
   expect(text).not.toContain(key);
   expect(text).not.toContain('"apiKey"');
   const report = JSON.parse(text);
-  expect(report.interpretation.observations[0].factIds).toContain("method");
-  expect(report.aiMeta.model).toBe("deepseek-flash");
+  expect(report.schemaVersion).toBe(3);
+  const reading = report.readingRevisions.find(
+    (r: { id: string }) => r.id === report.activeReadingId,
+  );
+  expect(reading.interpretation.reasoning[0].factIds.length).toBeGreaterThan(0);
+  expect(
+    reading.context.sources.some((source: { clauses: { id: string }[] }) =>
+      source.clauses.some(
+        (clause) =>
+          clause.id === reading.interpretation.reasoning[0].clauseIds[0],
+      ),
+    ),
+  ).toBe(true);
+  expect(reading.meta.model).toBe("deepseek-flash");
+  expect(reading.questionAskedAt).toBe(report.createdAt);
   expect(
     await page.evaluate(() =>
       Object.entries(localStorage)
@@ -278,9 +233,7 @@ test("one clarification round keeps the original chart and makes no repeated int
     .click();
   await page.getByRole("button", { name: "确认并解读", exact: true }).click();
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：根据补充核查岗位。", { exact: true }),
+    page.getByText("隔离测试回答：根据补充核查岗位。", { exact: true }),
   ).toBeVisible();
   expect(calls).toHaveLength(2);
   expect(calls.filter(isIntent)).toHaveLength(1);
@@ -306,15 +259,7 @@ test("invalid AI output leaves the chart intact and never retries automatically"
       ? intent(body)
       : {
           ...interpretation(body),
-          observations: [
-            {
-              kind: "traditional",
-              text: "此事必败。",
-              factIds: ["invented"],
-              evidenceIds: ["bifa-999"],
-              assessmentIds: ["bifa-999"],
-            },
-          ],
+          summary: "此事必败。",
         };
     await reply(route, value);
   });
@@ -366,9 +311,7 @@ test("cancelling a request discards its late answer and a new request can succee
   await reply(old, intent(old.request().postDataJSON() as Body));
   await page.getByRole("button", { name: "生成 AI 解读", exact: true }).click();
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：新的请求已完成。", { exact: true }),
+    page.getByText("隔离测试回答：新的请求已完成。", { exact: true }),
   ).toBeVisible();
   expect(calls).toBe(3);
 });
@@ -409,9 +352,7 @@ test("navigating to a new report prevents an old answer from overwriting it", as
   await authorize(page);
   await page.getByRole("button", { name: "生成 AI 解读", exact: true }).click();
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：只属于第二份报告。", { exact: true }),
+    page.getByText("隔离测试回答：只属于第二份报告。", { exact: true }),
   ).toBeVisible();
   await reply(
     oldInterpretation!,
@@ -424,9 +365,7 @@ test("navigating to a new report prevents an old answer from overwriting it", as
     page.getByText("隔离测试旧答案不得出现。", { exact: true }),
   ).toHaveCount(0);
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：只属于第二份报告。", { exact: true }),
+    page.getByText("隔离测试回答：只属于第二份报告。", { exact: true }),
   ).toBeVisible();
 });
 
@@ -462,7 +401,7 @@ test("browser storage denial keeps a temporary key and never claims it was saved
   expect(calls).toBe(0);
 });
 
-test("blank clarification answers can continue with known information in one round", async ({
+test("blank critical clarification keeps the question pending without a second model call", async ({
   page,
 }) => {
   const calls: Body[] = [];
@@ -473,7 +412,7 @@ test("blank clarification answers can continue with known information in one rou
       route,
       isIntent(body)
         ? intent(body, true)
-        : interpretation(body, "隔离测试回答：仅依据已知信息给出核查建议。"),
+        : interpretation(body, "隔离测试回答：明确所问后承接原盘。"),
     );
   });
   await cast(page);
@@ -483,17 +422,181 @@ test("blank clarification answers can continue with known information in one rou
     .getByRole("textbox", { name: "这次先核查哪一件事？", exact: true })
     .fill("   ");
   await page.getByRole("button", { name: "确认并解读", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText("选择");
   await expect(
-    page
-      .locator("#ai-reading")
-      .getByText("隔离测试回答：仅依据已知信息给出核查建议。", { exact: true }),
+    page.getByRole("heading", { name: "先明确这件事" }),
+  ).toBeVisible();
+  expect(calls).toHaveLength(1);
+  await page
+    .getByRole("button", { name: "如何核查新岗位条件？", exact: true })
+    .click();
+  await page.getByRole("button", { name: "确认并解读", exact: true }).click();
+  await expect(
+    page.getByText("隔离测试回答：明确所问后承接原盘。", { exact: true }),
   ).toBeVisible();
   expect(calls).toHaveLength(2);
-  expect(payload(calls[1]).answers).toEqual({});
-  expect(payload(calls[1]).intent.status).toBe("needs_clarification");
+  expect(payload(calls[1]).answers).toEqual({ scope: "如何核查新岗位条件？" });
+  expect(payload(calls[1]).intent.status).toBe("ready");
   await expect(page.getByRole("heading", { name: "先明确这件事" })).toHaveCount(
     0,
   );
+});
+
+for (const outcome of ["failure", "cancel"] as const) {
+  test(`updating an existing reading keeps its saved revision after ${outcome}`, async ({
+    page,
+  }) => {
+    let attempts = 0;
+    const calls: Body[] = [];
+    let held: Route | undefined;
+    await page.route(apiPattern, async (route) => {
+      const body = route.request().postDataJSON() as Body;
+      calls.push(body);
+      if (isIntent(body)) {
+        attempts++;
+        await reply(route, intent(body));
+      } else if (attempts === 1)
+        await reply(
+          route,
+          interpretation(body, "隔离测试第一版：原盘解释须保留。"),
+        );
+      else if (outcome === "failure")
+        await reply(route, { ...interpretation(body), summary: "此事必败。" });
+      else held = route;
+    });
+    await cast(page);
+    await authorize(page);
+    await page
+      .getByRole("button", { name: "生成 AI 解读", exact: true })
+      .click();
+    await expect(
+      page.getByText("隔离测试第一版：原盘解释须保留。", { exact: true }),
+    ).toBeVisible();
+    const before = await page.evaluate(() =>
+      localStorage.getItem("guanxiang.reports.v3"),
+    );
+    expect(JSON.parse(before!)[0].readingRevisions).toHaveLength(1);
+    const plate = await page
+      .getByRole("table", { name: "三传、遁干、六亲与天将" })
+      .innerText();
+    await page
+      .getByRole("button", { name: "沿用此课更新解读", exact: true })
+      .click();
+    if (outcome === "cancel") {
+      await expect.poll(() => Boolean(held)).toBe(true);
+      await expect(
+        page.getByText("隔离测试第一版：原盘解释须保留。", { exact: true }),
+      ).toBeVisible();
+      await page
+        .getByRole("button", { name: "取消本次解读", exact: true })
+        .click();
+      await expect(page.getByRole("alert")).toContainText("已取消");
+      await reply(
+        held!,
+        interpretation(
+          held!.request().postDataJSON() as Body,
+          "隔离测试迟到答案不得替换。",
+        ),
+      );
+    } else await expect(page.getByRole("alert")).toContainText("未通过");
+    await expect(
+      page.getByText("隔离测试第一版：原盘解释须保留。", { exact: true }),
+    ).toBeVisible();
+    expect(
+      await page.evaluate(() => localStorage.getItem("guanxiang.reports.v3")),
+    ).toBe(before);
+    expect(
+      await page
+        .getByRole("table", { name: "三传、遁干、六亲与天将" })
+        .innerText(),
+    ).toBe(plate);
+    await expect(
+      page.getByText("隔离测试迟到答案不得替换。", { exact: true }),
+    ).toHaveCount(0);
+    expect(calls).toHaveLength(4);
+    await page.reload();
+    await expect(
+      page.getByText("隔离测试第一版：原盘解释须保留。", { exact: true }),
+    ).toBeVisible();
+  });
+}
+
+test("an old corpus report updates along its original plate and preserves the historical answer", async ({
+  page,
+}) => {
+  const calls: Body[] = [];
+  await page.route(apiPattern, async (route) => {
+    const body = route.request().postDataJSON() as Body;
+    calls.push(body);
+    await reply(
+      route,
+      isIntent(body)
+        ? intent(body)
+        : interpretation(body, "隔离测试新版：沿原课采用新文献解释。"),
+    );
+  });
+  await cast(page);
+  const original = await page.evaluate(() => {
+    const report = JSON.parse(localStorage.getItem("guanxiang.reports.v3")!)[0];
+    report.schemaVersion = 2;
+    report.corpusVersion = "2020-historical-corpus";
+    report.interpretation = {
+      summary: "隔离测试历史答案：按旧版资料保留。",
+      observations: [
+        {
+          kind: "context",
+          text: "历史问题曾按已知信息记录。",
+          factIds: ["method"],
+          evidenceIds: [],
+          assessmentIds: [],
+        },
+      ],
+      advice: ["旧版行动记录仅按原样保存。"],
+      missingInformation: [],
+      limitations: ["这是旧版解释。"],
+    };
+    delete report.readingRevisions;
+    delete report.activeReadingId;
+    localStorage.setItem("guanxiang.reports.v2", JSON.stringify([report]));
+    localStorage.removeItem("guanxiang.reports.v3");
+    return report;
+  });
+  await page.reload();
+  await expect(
+    page.getByText(original.interpretation.summary, { exact: true }),
+  ).toBeVisible();
+  await authorize(page);
+  await page
+    .getByRole("button", { name: "沿用此课更新解读", exact: true })
+    .click();
+  await expect(
+    page.getByText("隔离测试新版：沿原课采用新文献解释。", { exact: true }),
+  ).toBeVisible();
+  const updated = await page.evaluate(
+    () => JSON.parse(localStorage.getItem("guanxiang.reports.v3")!)[0],
+  );
+  expect(updated.chart).toEqual(original.chart);
+  expect(updated.createdAt).toBe(original.createdAt);
+  expect(updated.corpusVersion).toBe(original.corpusVersion);
+  expect(updated.interpretation).toEqual(original.interpretation);
+  expect(updated.readingRevisions).toHaveLength(1);
+  expect(updated.readingRevisions[0].questionAskedAt).toBe(original.createdAt);
+  expect(payload(calls[1]).questionAskedAt).toBe(original.createdAt);
+  await page.getByLabel("解读版本").selectOption("historical");
+  await expect(
+    page.getByText(original.interpretation.summary, { exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByText(original.interpretation.summary, { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByLabel("解读版本")
+    .selectOption(updated.readingRevisions[0].id);
+  await expect(
+    page.getByText("隔离测试新版：沿原课采用新文献解释。", { exact: true }),
+  ).toBeVisible();
+  expect(calls).toHaveLength(2);
 });
 
 test("printing hides credential controls even when the user revealed the key", async ({
@@ -559,7 +662,7 @@ for (const heldStage of ["intent", "interpretation"] as const) {
     await page.bringToFront();
     await expect(
       page.getByRole("button", {
-        name: heldStage === "intent" ? "正在理解问题…" : "正在据课解读…",
+        name: heldStage === "intent" ? "正在理解问题…" : "正在据课推演…",
         exact: true,
       }),
     ).toBeDisabled();
@@ -576,22 +679,16 @@ for (const heldStage of ["intent", "interpretation"] as const) {
         : interpretation(body, "隔离测试回答：切回页面后仍保留结果。"),
     );
     await expect(
-      page
-        .locator("#ai-reading")
-        .getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
+      page.getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
     ).toBeVisible();
     await page.bringToFront();
     await expect(
-      page
-        .locator("#ai-reading")
-        .getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
+      page.getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
     ).toBeVisible();
     await other.bringToFront();
     await page.bringToFront();
     await expect(
-      page
-        .locator("#ai-reading")
-        .getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
+      page.getByText("隔离测试回答：切回页面后仍保留结果。", { exact: true }),
     ).toBeVisible();
     expect(calls).toHaveLength(2);
     await expect(

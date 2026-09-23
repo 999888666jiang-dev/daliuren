@@ -1,4 +1,5 @@
 import type { Category, ChartResult, EvidenceRecord } from "../core/types";
+import { validateMeaning, type MeaningSources } from "./meaning";
 import type {
   CategoryChoice,
   IntentAssessment,
@@ -94,10 +95,12 @@ export function validateIntent(
   value: unknown,
   question: string,
   categoryChoice: CategoryChoice,
+  meaningSources?: MeaningSources,
 ): IntentAssessment {
-  // Saved/resolved intents may include two user clarification answers in the source text.
+  // Saved/resolved intents may retain all three bounded answer sources, even
+  // though a single understanding round asks at most two new clarifications.
   if (
-    !validText(question, 4, 2400) ||
+    !validText(question, 4, 3000) ||
     (categoryChoice !== "auto" &&
       !CATEGORIES.includes(categoryChoice as Category))
   )
@@ -123,6 +126,7 @@ export function validateIntent(
       "categoryReason",
       "status",
       "source",
+      ...(Object.hasOwn(value, "meaning") ? ["meaning"] : []),
     ])
   )
     fail();
@@ -192,6 +196,14 @@ export function validateIntent(
     (value.status === "needs_clarification" && clarifications.length === 0)
   )
     fail();
+  let meaning: IntentAssessment["meaning"];
+  if (value.meaning !== undefined) {
+    try {
+      meaning = validateMeaning(value.meaning, meaningSources ?? question);
+    } catch {
+      fail();
+    }
+  }
   return {
     category: value.category as Category,
     coreQuestion: value.coreQuestion,
@@ -205,6 +217,7 @@ export function validateIntent(
     categoryReason: value.categoryReason,
     status: value.status as IntentAssessment["status"],
     source: value.source as IntentAssessment["source"],
+    ...(meaning ? { meaning } : {}),
   };
 }
 

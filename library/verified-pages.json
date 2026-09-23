@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-23.2",
+  "version": "2026-09-23.5",
   "verificationMethod": "Visual comparison with actual scan; punctuation editorial. No OCR match automatically grants verified status.",
   "pages": [
     {
@@ -421,6 +421,56 @@
       "reviewer": "Codex source_audit",
       "reviewScope": "中传杜传丁卯/己卯/辛卯：卯子午（右）",
       "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-024.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 24,
+      "sha256": "09e66e92e35198bd7653afe5a2f1345a92d67d18a9e78caba4e53c381322792f",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex classical_v3",
+      "reviewScope": "三传发端、转移、归结及合看得位禄生合/空墓克冲绝摘句",
+      "scopeWarning": "Only the named passages were reviewed; general symbolism is conditional and does not verify entire chapters."
+    },
+    {
+      "path": "public/sources/cuiyan-042.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 42,
+      "sha256": "5735b38a451dc35da56f12becfb5c2643c28429434e66cede8fb6edf3779ef8c",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex classical_v3",
+      "reviewScope": "贵人田土财帛后半句、螣蛇火烛惊恐、勾陈战斗词讼争端勾留片段、朱雀文书消息、六合和合交易类象摘句；42页勾陈截在勾留，未拼43页文字",
+      "scopeWarning": "Only the named passages were reviewed; general symbolism is conditional and does not verify entire chapters."
+    },
+    {
+      "path": "public/sources/cuiyan-043.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 43,
+      "sha256": "1a89630e481800eedc0e1375927063093b31ea2c592d1b2f22e960d5a927db6c",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex classical_v3",
+      "reviewScope": "青龙、天后、玄武、太常及太阴类象摘句；太阴放大核字为嫁娶；后文条件只核存在，不启用完整吉凶判定",
+      "scopeWarning": "Only the named passages were reviewed; general symbolism is conditional and does not verify entire chapters."
+    },
+    {
+      "path": "public/sources/cuiyan-044.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 44,
+      "sha256": "9c0d00572f288b6198ce4276eb1f7251b309f6410c826e1eb63ec19d436ebba7",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex classical_v3",
+      "reviewScope": "白虎道路疾病、天空市井约契虚诈类象摘句",
+      "scopeWarning": "Only the named passages were reviewed; general symbolism is conditional and does not verify entire chapters."
+    },
+    {
+      "path": "public/sources/cuiyan-172.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 172,
+      "sha256": "a5d818d26b09518aaac87f4baabf629853c6d823be7cde99762befdd7e32a29b",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex casting_modes and classical_v3",
+      "reviewScope": "求财章首：求財最要視青龍、青龍為才帛之神、六宮者初末干支年命六處也；只核取象理由，不启用完整旺衰年命",
+      "scopeWarning": "Only the named clauses were reviewed; not an unconditional wealth prediction."
     }
   ],
   "externalCalendarChecks": [

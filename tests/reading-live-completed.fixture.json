@@ -1,0 +1,1305 @@
+[
+  {
+    "manualInput": {
+      "daytime": true,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "辰",
+      "hourBranch": "巳"
+    },
+    "category": "business",
+    "interpretation": {
+      "summary": "按本课所据传统象义，此事有利与限制并见，偏不利于今日立即收到尾款。支持面是初传戌土生日干庚金，且青龙乘午临未、不旬空，四课有财帛线索；限制面是日上未乘天空主约契虚诈，初传父母乘玄武主暗昧失脱，末传兄弟乘白虎使归结偏压力与阻滞，而青龙未入三传，不能单独保证今日到账。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "本次取用：以我为日干庚金，尾款为财帛",
+          "explanation": "问题主体为“我”，按盘面对应日干庚金；实际动作是“收到”客户结清的尾款，属求财、回款事项。已核原则中“求财最要视青龙”用于取财帛线索，三传戌→酉→申用于组织发端、转移、归结，初传戌土生日干庚金可作支持线索；日上未乘天空又带市井约契、虚诈类象，作为对口头承诺兑现的限制线索。年命未提供，不纳入填实判断。",
+          "factIds": [
+            "day",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3",
+            "reading-qinglong-location",
+            "reading-transmission-1-day",
+            "lesson-1",
+            "reading-lesson-1-general"
+          ],
+          "assessmentIds": [
+            "principle-wealth-qinglong",
+            "principle-three-stages",
+            "principle-combined-conditions",
+            "principle-cuiyan-general-tiankong"
+          ],
+          "clauseIds": [
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-three-stages:quote",
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-general-tiankong:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "selection",
+          "title": "求财先取青龙，三传只作过程框架",
+          "literalMeaning": "这两句分别说：求财最要观察青龙；三传中初传表示发端，中传表示转移，末传表示归结。",
+          "application": "本问是回款求财，故以青龙为财帛观察线；三传戌→酉→申可组织客户承诺后的发端、发展与归结。青龙乘午临未且不旬空，但不在三传，不能据此保证今日到账，也不能反向断定钱款必不到。",
+          "contribution": "describes",
+          "factIds": ["day", "transmission-1", "reading-qinglong-location"],
+          "assessmentIds": [
+            "principle-wealth-qinglong",
+            "principle-three-stages"
+          ],
+          "clauseIds": [
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-three-stages:quote"
+          ]
+        },
+        {
+          "id": "reason-2",
+          "stage": "conditions",
+          "title": "初传生干是有限支持，三传不空只说明不加重空象",
+          "literalMeaning": "得到合宜位置、禄、生、合等神则吉，落入陷、空、墓、克、冲、绝等神则凶。",
+          "application": "本课初传戌土生日干庚金，属于“生”的支持线索；三传戌、酉、申本支不旬空，故不把旬空作为主过程的不利加重项。但得位、禄、墓、冲、绝及完整旺衰未核定，所以只能把初传生干视为有限支持，不能据此断今日必到。",
+          "contribution": "supports",
+          "factIds": [
+            "day",
+            "voids",
+            "transmission-1",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "generals",
+          "title": "玄武与天空给承诺与款项信息加虚诈、失脱线索",
+          "literalMeaning": "玄武主盗贼、亡失、争斗、奸诈之事；天空主市井、约契、奴仆、虚诈之事。",
+          "application": "初传父母乘玄武，父母可取文书、信息，玄武添暗昧失脱；日上未乘天空，而本问正涉及客户口头答应结清尾款的约契、承诺。两象合看，提示对到账承诺与款项信息需核实，构成对“今天即到”的限制；但不得据此断定客户欺骗或款项已经失去。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "lesson-1",
+            "reading-lesson-1-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-xuanwu",
+            "principle-cuiyan-general-tiankong"
+          ],
+          "clauseIds": [
+            "cuiyan-general-xuanwu:quote",
+            "cuiyan-general-tiankong:quote"
+          ]
+        },
+        {
+          "id": "reason-4",
+          "stage": "generals",
+          "title": "青龙在四课不空，但只能作有限财帛线索",
+          "literalMeaning": "青龙主官府升迁、书契、财帛、谷米、婚姻、喜庆之事；求财最要观察青龙。",
+          "application": "第二课未上午，青龙乘午临未，所乘支不旬空，说明四课中确有财帛喜庆类象可取；但青龙未入三传，按已核说明不能因此推成款项未落实或必延期。它给本问提供“有款可谈”的有限支持，不足以单独支持今日收到。",
+          "contribution": "supports",
+          "factIds": [
+            "lesson-2",
+            "reading-lesson-2-general",
+            "reading-qinglong-location"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-qinglong",
+            "principle-wealth-qinglong"
+          ],
+          "clauseIds": [
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-wealth-qinglong:quote"
+          ]
+        },
+        {
+          "id": "reason-5",
+          "stage": "transmissions",
+          "title": "太常带财物象，白虎在末传添压力与阻碍",
+          "literalMeaning": "太常主印绶、冠裳、饮食、婚姻、财物、五谷之事；白虎主道路、杀伐、疾病、刑戮、血光之事。",
+          "application": "中传酉乘太常，太常类象含财物，可看作款项信息或财物线索尚在过程中；末传申乘白虎，白虎取象偏道路、杀伐、血光，作为归结处的压力、阻滞线索。不能仅凭白虎断必然不到账，但它使今日顺畅到账的把握受限。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-taichang",
+            "principle-cuiyan-general-baihu"
+          ],
+          "clauseIds": [
+            "cuiyan-general-taichang:quote",
+            "cuiyan-general-baihu:quote"
+          ]
+        },
+        {
+          "id": "reason-6",
+          "stage": "lessons",
+          "title": "太阴财帛类象不在三传，只作旁证",
+          "literalMeaning": "太阴主妇女、奴婢、财帛、嫁娶、阴私之事。",
+          "application": "第三课亥乘太阴，类象中虽有财帛，但太阴不在三传主过程，且带阴私色彩；对今天能否收到尾款只能作旁证或说明款项事宜可能不公开、需私下核对，不能单独支持到账。",
+          "contribution": "describes",
+          "factIds": ["lesson-3", "reading-lesson-3-general"],
+          "assessmentIds": ["principle-cuiyan-general-taiyin"],
+          "clauseIds": ["cuiyan-general-taiyin:quote"]
+        },
+        {
+          "id": "reason-7",
+          "stage": "transmissions",
+          "title": "四课三传的建立只证明起盘步骤",
+          "literalMeaning": "十干寄宫各有固定位置；取三传先取下贼，如无下贼则取上克下。",
+          "application": "本课按已冻结的十干寄宫建立四课，并按贼克取出戌、酉、申三传。这些只说明课盘如何成立，不直接证明今天能否收到尾款。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "lesson-1",
+            "lesson-2",
+            "lesson-3",
+            "lesson-4",
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["procedure-jigong", "procedure-transmissions"],
+          "clauseIds": ["daquan-jigong:quote", "daquan-zeike:quote"]
+        }
+      ],
+      "synthesis": {
+        "text": "综合取mixed：初传戌土生日干庚金，青龙在四课不空，说明财帛和消息线索存在，这是支持面；但日上天空主约契虚诈、初传父母乘玄武主暗昧失脱，末传白虎又使归结处偏压力与阻滞，且青龙未入三传不能单独保证到账。因此不能据客户口头承诺判断今天必到，今日即时到账的条件偏不足，倾向于有利与限制并见而偏阻。若后续能核实到账凭证或客户给出明确付款执行信息，可修正为偏顺；若仍只有口头承诺，则维持偏阻判断。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5",
+          "reason-6",
+          "reason-7"
+        ]
+      },
+      "advice": [
+        {
+          "action": "今天直接向客户索取付款回单、网银转账截图或让财务确认是否已发起付款，并核对约定账户。",
+          "purpose": "天空、玄武类象提示约契与款项信息可能有虚而不实或暗昧之处，先核实执行痕迹，比只等口头承诺更符合本课限制。",
+          "reasoningIds": ["reason-3", "reason-4"]
+        },
+        {
+          "action": "若对方只重申会付而未提供回单，要求给出明确付款日期、方式和责任账户，并保留文字或邮件记录。",
+          "purpose": "末传白虎与太常财物象说明归结处可能有压力或阻滞，书面节点便于后续催收。",
+          "reasoningIds": ["reason-5"]
+        }
+      ],
+      "limitations": [
+        "年命未提供，本程序未将年命填实纳入判断；不能把未知年命当作已填实或已排除。",
+        "得位、禄、墓、冲、绝及完整旺衰未核定，初传生干只能作有限支持。",
+        "客户实际付款能力、账户到账规则与今天是否已发起付款等现实条件未提供，课象不能替代付款核实。",
+        "占时巳虽属旬空，但未提供针对占时的已核断法，本解读不据此推断今日落空或不到账。"
+      ]
+    }
+  },
+  {
+    "manualInput": {
+      "daytime": true,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "辰",
+      "hourBranch": "午"
+    },
+    "category": "general",
+    "interpretation": {
+      "summary": "按本课所据传统象义，两项并非一边倒，呈有利与限制并见（mixed）。去看展有六合朋友、青龙喜庆文化类象，但初传午火官鬼克日干庚，中传六合又逢旬空，朋友和合与行程之利打折；留在家画画有中传辰土父母生庚、末传寅木妻财之象，但中传空、末传寅坐辰空且螣蛇伴身，创作支持不实、收束易有焦躁牵动。故不能单断看展或留家更优；若重朋友互动，看展类象较直接但须防约伴落空；若重独处产出，留家有生身与财象但须接受阻滞与调整。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "本次取用",
+          "explanation": "以日干庚为本人（问题未明示主体，按默认本人作本次取用假设），比较“与朋友看展”和“留家画画”。没有专门类神条文，故用三传发端—转移—归结、生克旬空的一般关系原则，并以六合、青龙取朋友和合与文化喜庆，以父母、妻财、螣蛇取居所创作及其收束扰动。",
+          "factIds": [
+            "day",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3",
+            "reading-transmission-1-detail",
+            "reading-transmission-2-detail",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2",
+            "lesson-1",
+            "reading-lesson-1-general",
+            "lesson-2",
+            "reading-lesson-2-general",
+            "voids"
+          ],
+          "assessmentIds": [
+            "principle-three-stages",
+            "principle-combined-conditions",
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-liuhe",
+            "principle-cuiyan-general-tengshe"
+          ],
+          "clauseIds": [
+            "cuiyan-three-stages:quote",
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-liuhe:quote",
+            "cuiyan-general-tengshe:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "lessons",
+          "title": "十干寄宫只建立四课，不判吉凶",
+          "literalMeaning": "十干寄宫的口诀是说：甲寄寅，乙寄辰，丙戊寄巳，丁己寄未，庚寄申，辛寄戌，壬寄亥，癸寄丑；四正之位不用来寄宫。",
+          "application": "本课日干为庚，按此规则建立四课，才有第1课庚上午等课体。它只能证明课盘如何排出，不能直接说明去看展或留家画画哪个更合适。",
+          "contribution": "describes",
+          "factIds": ["day", "lesson-1", "lesson-2", "lesson-3", "lesson-4"],
+          "assessmentIds": ["procedure-jigong"],
+          "clauseIds": ["daquan-jigong:quote"]
+        },
+        {
+          "id": "reason-2",
+          "stage": "transmissions",
+          "title": "涉害取三传只说明取传算法",
+          "literalMeaning": "涉害口诀是说：行到本家才停止，路上遇多重克害便取为用；孟位深、仲位浅、季位休；若深浅相等，柔辰刚日各有所宜。",
+          "application": "本课按涉害深浅取午发传，形成初传午、中传辰、末传寅。它只说明三传怎样取出，不能由取传口诀判定两选项的吉凶。",
+          "contribution": "describes",
+          "factIds": [
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["procedure-transmissions"],
+          "clauseIds": ["daquan-shehai:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "transmissions",
+          "title": "三传提供发端、转移、归结框架",
+          "literalMeaning": "该句是说：初传是事情的发端，中传是转移变化，末传是归结收束。",
+          "application": "本课三传为午→辰→寅，可据此把周末选择看作发端、转移、归结三个解释层次；但阶段框架本身不表示现实已经进入某一阶段，也不单独判吉凶，必须再结合生克、天将与旬空。",
+          "contribution": "describes",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-three-stages"],
+          "clauseIds": ["cuiyan-three-stages:quote"]
+        },
+        {
+          "id": "reason-4",
+          "stage": "conditions",
+          "title": "父母生身、妻财为克：留家画画有支持线索",
+          "literalMeaning": "该句是说：遇到得位、禄、生、合等神则吉，遇到陷、空、墓、克、冲、绝等神则凶。",
+          "application": "本课中传辰土为父母，辰生庚金日干，可作居所、自我支撑一类支持线索；末传寅木为妻财，庚金克寅木，可作我方可掌控的创作产出或收获线索。若留在家画画，这两点使该选项有可承接的生扶与产出之象，但中传旬空、末坐辰空，支持并不实。",
+          "contribution": "supports",
+          "factIds": [
+            "day",
+            "transmission-2",
+            "reading-transmission-2-day",
+            "transmission-3",
+            "reading-transmission-3-day"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-5",
+          "stage": "conditions",
+          "title": "官鬼克日、中传旬空、末坐空：两选项皆有限制",
+          "literalMeaning": "同一句还表明：得位、禄、生、合等可作吉的条件，与陷、空、墓、克、冲、绝等可作凶的条件要合看，不能只取一面。",
+          "application": "已算盘值中，初传午火官鬼克日干庚，发端有外部压力或人选行程牵制；中传辰土虽生庚，但本支旬空，生扶落空；末传寅木不空却地盘落辰，且寅木克中传辰土，表示后续成果会牵动前段支持。看展与画画都受这些限制影响，不能见生或见财就断为合适。",
+          "contribution": "limits",
+          "factIds": [
+            "day",
+            "voids",
+            "transmission-1",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-6",
+          "stage": "generals",
+          "title": "青龙六合为看展提供朋友和合与喜庆文化类象",
+          "literalMeaning": "六合原句意为：主管和合、交易、婚姻、子孙、朋友之事。青龙原句意为：主管官府升迁、书契、财帛、谷米、婚姻、喜庆之事。",
+          "application": "本课初传午乘青龙，中传辰乘六合，第1课午乘青龙、第2课辰乘六合。与朋友去看展可取六合的朋友和合，以及青龙的书契喜庆、文化活动类象，作为看展选项的支持线索；但类象不是事实证据，中传六合又逢旬空，须与限制项合看。",
+          "contribution": "supports",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "lesson-1",
+            "reading-lesson-1-general",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "lesson-2",
+            "reading-lesson-2-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-liuhe"
+          ],
+          "clauseIds": [
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-liuhe:quote"
+          ]
+        },
+        {
+          "id": "reason-7",
+          "stage": "generals",
+          "title": "螣蛇玄武白虎提示两选项的扰动类象",
+          "literalMeaning": "螣蛇原句意为：主管火烛、血光、惊恐、怪异之事。玄武原句意为：主管盗贼、亡失、争斗、奸诈之事。白虎原句意为：主管道路、杀伐、疾病、刑戮、血光之事。",
+          "application": "末传寅乘螣蛇，若在家画画，收束阶段可有焦躁、坐不定或怪异不安一类扰动；第3课戌乘玄武、第4课申乘白虎，若外出看展，可取道路、人际失序或争扰类象作风险提示。但这些只是天将类象，不能坐实为实际盗窃、疾病或争斗，也不能由此断定某一选项必坏。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "lesson-3",
+            "reading-lesson-3-general",
+            "lesson-4",
+            "reading-lesson-4-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-tengshe",
+            "principle-cuiyan-general-xuanwu",
+            "principle-cuiyan-general-baihu"
+          ],
+          "clauseIds": [
+            "cuiyan-general-tengshe:quote",
+            "cuiyan-general-xuanwu:quote",
+            "cuiyan-general-baihu:quote"
+          ]
+        }
+      ],
+      "synthesis": {
+        "text": "本课以日干庚为本人，三传午→辰→寅为共同框架。十干寄宫和涉害取传只证明四课三传如此排出，不直接判吉凶；三阶段只把所问分为发端、转移、归结，不表示现实已进入某阶段。合看生克旬空，中传辰土生庚、末传寅木为庚所克，给留家画画以父母生身和妻财产出线索；但初传午火官鬼克庚属发端压力，中传辰旬空使生扶落空，末传寅坐辰空并克中传，显示后续不稳。天将类象上，青龙与六合支持看展的朋友和合、文化喜庆；螣蛇、玄武、白虎又给画画收束和外出道路人际带来扰动类象。支持与限制并存，且没有专门类神判定看展或画画的唯一优劣，故取 mixed；若现实条件改变，如朋友确定同去或本人更重创作产出，取舍可相应调整。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5",
+          "reason-6",
+          "reason-7"
+        ]
+      },
+      "advice": [
+        {
+          "id": "advice-1",
+          "action": "若更看重与朋友互动和文化活动，先与朋友确认是否确定同去、时间地点后再决定看展；若约定不稳，不把看展当作唯一安排。",
+          "purpose": "六合类象支持朋友和合，但中传六合旬空，先核实可减少约伴落空带来的限制。",
+          "reasoningIds": ["reason-6", "reason-5"]
+        },
+        {
+          "id": "advice-2",
+          "action": "若更看重独处创作，可留在家画画，但把目标设为可中断、可分次完成的小幅练习，并预留调整时间，不追求一次完成。",
+          "purpose": "中传父母生身、末传妻财有支持产出线索，但中传空、末传螣蛇坐空且克中，分次完成可承接其限制。",
+          "reasoningIds": ["reason-4", "reason-5", "reason-7"]
+        }
+      ],
+      "limitations": [
+        "未提供朋友是否确定同去、本人更看重朋友互动还是创作产出、准备程度等现实条件，不能代填；这些条件会改变两选项的取舍。",
+        "天将类象只是传统解释线索，不是事件已发生的证据；没有现实背景时不能坐实为失窃、争斗、疾病或具体情绪问题。",
+        "本次未提供年命及填实条件，故不将年命作为已满足论据，也不据此补断应期或人物。",
+        "三传生克与旬空只按已算盘值说明支持与限制，不构成概率、保证或精确应验日。"
+      ]
+    }
+  },
+  {
+    "manualInput": {
+      "daytime": true,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "辰",
+      "hourBranch": "未"
+    },
+    "category": "career",
+    "interpretation": {
+      "summary": "按本课所据传统象义，下周面试有通过机会，但过程不算轻松，宜按“有利与限制并见”看。主要有利处：初传午为官鬼，代表职位、考官或录用机会，乘青龙，青龙主官府升迁、书契喜庆；中传卯木生初传午火，末传子水生中传卯木，三传向官鬼递生，官星得扶。限制处：初传午火克日干庚金，面试要求与压力直接加身；四课见勾陈、螣蛇，提示竞争、勾留与临场紧张。三传本支不旬空，不因旬空断败。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "以日干与官鬼取用面试",
+          "explanation": "所问主体是本人，动作是参加技术岗位面试。按传统以日干庚代表本人，以初传官鬼午火代表职位、考官与录用机会，以中传妻财卯木为过程资源与文书消息，以末传子孙子水为自身产出与结果方向；用已核三传框架和综合生克条件取用，不另造专门类神。",
+          "factIds": [
+            "day",
+            "transmission-1",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-day",
+            "transmission-3",
+            "reading-transmission-3-day"
+          ],
+          "assessmentIds": [
+            "principle-three-stages",
+            "principle-combined-conditions"
+          ],
+          "clauseIds": [
+            "cuiyan-three-stages:quote",
+            "cuiyan-combined-conditions:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "selection",
+          "title": "本课排盘与取传步骤",
+          "literalMeaning": "前句讲十干寄宫口诀：甲寄寅、乙寄辰、丙戊寄巳、丁己寄未、庚寄申、辛寄戌、壬寄亥、癸寄丑，四正之宫不用于寄宫。后句讲取三传先比较天盘上神与日干阴阳，阳日取阳、阴日取阴；若都比或都不比，则另用涉害等法。",
+          "application": "本课按庚日寄申、四课与比用取传法排出，初传取与庚阳性相同的午，形成午到卯到子的三传。这一步只证明盘面来源，不直接判定面试吉凶。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "lesson-1",
+            "lesson-2",
+            "lesson-3",
+            "lesson-4",
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["procedure-jigong", "procedure-transmissions"],
+          "clauseIds": ["daquan-jigong:quote", "daquan-biyong:quote"]
+        },
+        {
+          "id": "reason-2",
+          "stage": "transmissions",
+          "title": "三传作发端转移归结的框架",
+          "literalMeaning": "初传是事情的发端，中传是发展转移，末传是归结。",
+          "application": "本课三传午、卯、子，可用此框架看面试的发端、过程与收束，但框架本身不说明吉凶或应期，仍需结合生克与天将。",
+          "contribution": "describes",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail"
+          ],
+          "assessmentIds": ["principle-three-stages"],
+          "clauseIds": ["cuiyan-three-stages:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "conditions",
+          "title": "官鬼得中末递生为有利线索",
+          "literalMeaning": "遇到得位、禄、生、合等神为吉，遇到陷、空、墓、克、冲、绝等为凶。",
+          "application": "本课中传卯木生初传午火，末传子水生中传卯木，形成向初传官鬼递生的链条；官鬼为职位、考官与录用机会，这为面试录用提供支持线索，但不是必成保证。",
+          "contribution": "supports",
+          "factIds": [
+            "reading-transmission-1-day",
+            "reading-transmission-2-day",
+            "reading-transmission-3-day",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-4",
+          "stage": "conditions",
+          "title": "官鬼克日干构成压力与限制",
+          "literalMeaning": "同一原则也把“克”列为不利条件，提示遇克不可直接看作成事。",
+          "application": "初传午火为官鬼，克日干庚金，表示职位与考官的要求直接压向本人，面试压力与筛选强度是限制面；但只凭此克不能断败。",
+          "contribution": "limits",
+          "factIds": ["day", "transmission-1", "reading-transmission-1-day"],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-5",
+          "stage": "generals",
+          "title": "青龙与太常提供职位喜庆类象",
+          "literalMeaning": "青龙主官府升迁、文书契约、财帛谷物、婚姻喜庆之类；太常主印绶、冠裳、饮食、婚姻、财物、五谷之类。",
+          "application": "初传官鬼午乘青龙，且第4课上神午也乘青龙，职位与升迁、官府文书类象相合；第3课上神酉乘太常，太常的印绶冠裳可对应正式职位、身份文书。二者为面试录用提供正面类象，但只是线索。",
+          "contribution": "supports",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "lesson-4",
+            "reading-lesson-4-general",
+            "lesson-3",
+            "reading-lesson-3-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-taichang"
+          ],
+          "clauseIds": [
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-taichang:quote"
+          ]
+        },
+        {
+          "id": "reason-6",
+          "stage": "generals",
+          "title": "朱雀与天后关涉表达与恩泽",
+          "literalMeaning": "朱雀主文书、敕命、消息、口舌、词讼之类；天后主庆赏、恩泽、阴私之类。",
+          "application": "中传卯妻财乘朱雀，面试中的表达、文书材料与消息沟通是过程重点，也需防口舌表达失误；末传子子孙乘天后，结果方向带恩泽、关照类象。二者对结果不构成直接否定，但需结合官鬼克身看。",
+          "contribution": "supports",
+          "factIds": [
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-zhuque",
+            "principle-cuiyan-general-tianhou"
+          ],
+          "clauseIds": [
+            "cuiyan-general-zhuque:quote",
+            "cuiyan-general-tianhou:quote"
+          ]
+        },
+        {
+          "id": "reason-7",
+          "stage": "generals",
+          "title": "勾陈与螣蛇提示竞争惊扰",
+          "literalMeaning": "勾陈主战斗、词讼、争端、勾留；螣蛇主火烛、血光、惊恐、怪异之类。",
+          "application": "第1课日干上神巳乘勾陈，提示面试过程中可能有竞争、争论式追问或流程拖延；第2课寅乘螣蛇，提示临场紧张、意外小惊扰。两将落在四课而非三传主链，属限制性提醒，不单断败。",
+          "contribution": "limits",
+          "factIds": [
+            "lesson-1",
+            "reading-lesson-1-general",
+            "lesson-2",
+            "reading-lesson-2-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-gouchen",
+            "principle-cuiyan-general-tengshe"
+          ],
+          "clauseIds": [
+            "cuiyan-general-gouchen:quote",
+            "cuiyan-general-tengshe:quote"
+          ]
+        }
+      ],
+      "synthesis": {
+        "text": "综合取mixed。官鬼得中末递生、临青龙，太常印绶也见，说明职位机会与正式录用类象有支撑；但初传官鬼克日干，四课勾陈螣蛇提示压力、竞争、勾留与临场紧张，所以不是毫无波折的顺利。末传子孙本可克官鬼，但本课子水生卯木、卯木生午火，克势被中传财星通关，故不能据末传独断失败。三传本支不旬空，旬空辰巳未直接落在三传主链，不据此断落空。若实际反馈显示岗位要求或竞争者情况变化，应回到原盘解释核对，而不是把盘面条件改成现实结果。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5",
+          "reason-6",
+          "reason-7"
+        ]
+      },
+      "advice": [
+        {
+          "action": "围绕岗位核心要求做两轮压力模拟，重点准备被追问项目细节、技术取舍和失败案例。",
+          "purpose": "初传官鬼克日干且青龙临官，说明职位要求会直接加压；提前演练可把克身压力转为可应对的考察。",
+          "reasoningIds": ["reason-4", "reason-5"]
+        },
+        {
+          "action": "把项目材料、证书、代码或作品集按面试流程整理成可快速说明的版本，并练习口齿清楚的短答。",
+          "purpose": "中传朱雀主文书消息，太常主印绶冠裳；材料与表达一致，有利于应对文书、身份与沟通类环节。",
+          "reasoningIds": ["reason-5", "reason-6"]
+        },
+        {
+          "action": "面试当天提前到场、预留缓冲，遇到追问先确认问题再答，避免与面试官争辩或陷入长时间纠缠。",
+          "purpose": "勾陈主争端勾留、螣蛇主惊恐怪异，四课见之提示竞争与临场紧张；稳住流程可减少限制项影响。",
+          "reasoningIds": ["reason-7"]
+        }
+      ],
+      "limitations": [
+        "未提供年命，年命填实与否未判；三传本支不旬空，但取用支或其地盘坐空未完整核定，不能据此另加吉凶。",
+        "未提供面试官、竞争者、面试形式等现实信息，课象只作传统定性，不能替代对具体表现的判断。",
+        "本课按固定日辰、月将与占时解读，现实中的时间流逝或关系变化不会改变这张盘的星将三传；若要核对，只能以新信息复核原解释。"
+      ]
+    }
+  },
+  {
+    "manualInput": {
+      "daytime": false,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "巳",
+      "hourBranch": "丑"
+    },
+    "category": "general",
+    "interpretation": {
+      "summary": "按本课所据传统象义，第一次学陶艺报名周末体验课呈有利与限制并见的混合倾向，不能据此断必成或必败。有利处在三传末段子水子孙乘青龙且不旬空，日干庚金生子水，归结算有投入体验、喜庆与书契类象；初传辰土父母乘玄武且旬空，发端报名/开课信息这一环有空与争议类象；中传申金乘螣蛇且地盘坐辰旬空，上课过程可能紧张或临时怪异。综合取 mixed：可以参加，但应把核实开课与费用、安全、降低成果预期放在前面。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "以日干为我，三传看报名、上课与体验归结",
+          "explanation": "未提供陶艺课专门类神，故不伪称专门断法；本次以日干庚为我，实际动作是报名参加周末陶艺体验课。取用已核三传阶段原则，把初传辰视为报名发端，中传申视为上课过程，末传子视为体验收束；综合条件用于核对旬空与生克。天将类象只在后续推演中作线索。",
+          "factIds": [
+            "day",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "reading-transmission-2-day",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-transmission-3-day",
+            "reading-chain-1",
+            "reading-chain-2",
+            "voids"
+          ],
+          "assessmentIds": [
+            "principle-three-stages",
+            "principle-combined-conditions"
+          ],
+          "clauseIds": [
+            "cuiyan-three-stages:quote",
+            "cuiyan-combined-conditions:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "selection",
+          "title": "排盘程序只证明取课路径",
+          "literalMeaning": "十干寄宫口诀说明各日干所寄宫位；贼克口诀说明先取下贼，若没有下贼，就取上克下者为初传。",
+          "application": "本课按庚日寄宫建立四课，并按贼克法取辰、申、子三传。这些步骤只说明课盘如何形成，不能直接证明报名参加是否合适。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "lesson-1",
+            "lesson-2",
+            "lesson-3",
+            "lesson-4",
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["procedure-jigong", "procedure-transmissions"],
+          "clauseIds": ["daquan-jigong:quote", "daquan-zeike:quote"]
+        },
+        {
+          "id": "reason-2",
+          "stage": "transmissions",
+          "title": "三传提供发端、转移、归结的分析脉络",
+          "literalMeaning": "初传是事情的发端，中传是事情的转移变化，末传是事情的归结。",
+          "application": "本课三传为辰→申→子。就本问而言，可把初传对应报名与入门，中传对应实际上课过程，末传对应体验后的收束；这只是组织分析，不因有三阶段就断定事情必成或需等待。",
+          "contribution": "describes",
+          "factIds": [
+            "transmission-1",
+            "transmission-2",
+            "transmission-3",
+            "reading-transmission-1-detail",
+            "reading-transmission-2-detail",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-three-stages"],
+          "clauseIds": ["cuiyan-three-stages:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "conditions",
+          "title": "初传旬空乘玄武：报名发端信息需核实",
+          "literalMeaning": "综合条件原句说，得位、禄、生、合等神则吉，陷、空、墓、克、冲、绝等神则凶；玄武传统主盗贼亡失争斗奸诈之事。",
+          "application": "初传辰土为父母，本支旬空，地盘落子，又乘玄武。父母在这里只作六亲程序名，不直接等同报名文书；但作为发端支，旬空与玄武类象提示周末班是否确定开课、费用与临时安排等信息需要核对，不因此断定不能参加。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "reading-transmission-1-day",
+            "voids",
+            "lesson-2",
+            "reading-lesson-2-general",
+            "lesson-3",
+            "reading-lesson-3-general"
+          ],
+          "assessmentIds": [
+            "principle-combined-conditions",
+            "principle-cuiyan-general-xuanwu"
+          ],
+          "clauseIds": [
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-general-xuanwu:quote"
+          ]
+        },
+        {
+          "id": "reason-4",
+          "stage": "generals",
+          "title": "中传螣蛇坐空：过程可能紧张，不等于凶",
+          "literalMeaning": "螣蛇传统主火烛、血光、惊恐、怪异之事。",
+          "application": "中传申金为兄弟，乘螣蛇，地盘落辰而辰为旬空。对应第一次上课过程，传统类象可提示手生、紧张、临时小惊惶或流程不稳；这只是类象线索，单一天将不断吉凶，也不表示会有实际血光灾祸。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "lesson-4",
+            "reading-lesson-4-general"
+          ],
+          "assessmentIds": ["principle-cuiyan-general-tengshe"],
+          "clauseIds": ["cuiyan-general-tengshe:quote"]
+        },
+        {
+          "id": "reason-5",
+          "stage": "conditions",
+          "title": "末传青龙不空：归结算有喜庆书契线索",
+          "literalMeaning": "综合条件原句说，得位、禄、生、合等神则吉，陷、空、墓、克、冲、绝等神则凶；青龙传统主官府升迁、书契、财帛、谷米、婚姻、喜庆之事。",
+          "application": "末传子水为子孙，不旬空，乘青龙；日干庚金生子水，前段也有初生中、中生末的相生链。对应体验收束，可取投入创作、报名凭证与课程记录、轻松喜庆等线索，说明归结算有支持；但见生和青龙不能保证作品成果或一定满意。",
+          "contribution": "supports",
+          "factIds": [
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-transmission-3-day",
+            "reading-chain-2",
+            "lesson-1",
+            "reading-lesson-1-general"
+          ],
+          "assessmentIds": [
+            "principle-combined-conditions",
+            "principle-cuiyan-general-qinglong"
+          ],
+          "clauseIds": [
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-general-qinglong:quote"
+          ]
+        }
+      ],
+      "synthesis": {
+        "text": "本课不是单吉单凶：末传子水子孙不空、乘青龙，日干生子且有相生链，传统象义偏于体验与收束有支持；但初传父母辰乘玄武又旬空，报名发端有信息不清、费用或临时变动类象，中传申乘螣蛇又坐辰空，过程可能有紧张与手忙脚乱。比和只作五行关系，不单独作顺阻论；排盘程序只证明课盘形成。综合取 mixed，可以报名参加，但先把开课确认、费用包含、退改规则和安全事项问清；若主办方信息含糊或临时加价，则应保留判断，不宜勉强。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5"
+        ]
+      },
+      "advice": [
+        {
+          "id": "advice-1",
+          "action": "报名前向主办方确认周末班是否确定开课、名额、费用包含材料与工具、退改规则。",
+          "purpose": "初传辰乘玄武且旬空，发端有信息不清与争议类象，先核实可减少临时变动。",
+          "reasoningIds": ["reason-3"]
+        },
+        {
+          "id": "advice-2",
+          "action": "第一次上课选基础体验项目，听从老师示范，注意轮盘、刀具和窑炉等操作安全，预留交通与操作时间。",
+          "purpose": "中传乘螣蛇且坐空，过程象义偏紧张怪异，先熟悉环境和安全要点可降低手忙脚乱。",
+          "reasoningIds": ["reason-4"]
+        },
+        {
+          "id": "advice-3",
+          "action": "把目标放在体验和了解兴趣，保留报名凭证与课后记录，再决定是否报后续课程。",
+          "purpose": "末传不空乘青龙，归结算有书契喜庆线索，但不保证出成品或结果，宜以轻体验收束。",
+          "reasoningIds": ["reason-5"]
+        }
+      ],
+      "limitations": [
+        "未提供陶艺体验课的专门类神，本次仅用三传阶段、综合条件和天将类象作一般线索，不能替代对课程实际质量、教师与场地的现实判断。",
+        "未提供主办方、费用、身体条件与交通等信息；玄武、螣蛇只作传统类象提醒，不能据此断定对方动机、课程必有事故或一定发生争议。",
+        "年命未提供，本次未作年命填实或未填实判断；初传旬空与中传坐空只就三传本身说明，不推及占时或整日。"
+      ]
+    }
+  },
+  {
+    "manualInput": {
+      "daytime": true,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "辰",
+      "hourBranch": "巳"
+    },
+    "category": "business",
+    "interpretation": {
+      "summary": "按本课所据传统象义，今天能否收到客户结清的尾款，不是单纯顺成的课象：青龙为求财要神，本课青龙乘午临未且不旬空，四课见之，初传父母戌土又生庚金，中传太常主财物，说明款项和文书层面有财帛线索与助力；但青龙不入三传，干上未乘天空，正对“客户答应结清”的约契，带虚诈不实之象，初传父母又乘玄武，提示付款凭据或沟通有争鬪奸诈类象，末传白虎亦带催促争竞之象。故今天全额到账缺乏确定支持，宜看作有利线索与限制并见、到账存疑，需先核实是否已实际发起付款。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "本次取用",
+          "explanation": "所问主体为“我”，以日干庚金为本人；所问对象为尾款，取求财原则中的青龙为财帛观察线索。客户“答应结清”属约契承诺，取干上未乘天空；付款凭据、文书类线索取初传父母戌土乘玄武。三传戌酉申只作发端、转移、归结的框架，不单凭三传数量断今天成败。",
+          "factIds": [
+            "day",
+            "voids",
+            "reading-qinglong-location",
+            "lesson-1",
+            "reading-lesson-1-general",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": [
+            "principle-wealth-qinglong",
+            "principle-cuiyan-general-tiankong",
+            "principle-cuiyan-general-xuanwu",
+            "principle-combined-conditions"
+          ],
+          "clauseIds": [
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-general-tiankong:quote",
+            "cuiyan-general-xuanwu:quote",
+            "cuiyan-combined-conditions:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "selection",
+          "title": "排盘步骤只说明课体来源",
+          "literalMeaning": "十干各有寄宫，排四课先按寄宫规则确定上神；取三传时先看下贼，若没有下贼，就取上克下之神发初传。",
+          "application": "本课依庚子日、巳时等已冻结条件排出四课和三传，只证明课体如何建立，不能据此判断客户今天是否付款。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "lesson-1",
+            "lesson-2",
+            "lesson-3",
+            "lesson-4",
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": ["procedure-jigong", "procedure-transmissions"],
+          "clauseIds": ["daquan-jigong:quote", "daquan-zeike:quote"]
+        },
+        {
+          "id": "reason-2",
+          "stage": "transmissions",
+          "title": "三传只提供发端、转移、归结框架",
+          "literalMeaning": "初传是事情的发端，中传是事情的转移变化，末传是事情的归结。",
+          "application": "本课三传为戌、酉、申，可用作观察尾款从承诺、沟通到结果的线索顺序，但不能仅因有初、中、末传就推定今天已经进入某一阶段、需要等待或已经必然收束。",
+          "contribution": "describes",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-three-stages"],
+          "clauseIds": ["cuiyan-three-stages:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "selection",
+          "title": "取青龙、天空、玄武为本次关键类象",
+          "literalMeaning": "求财最要紧的是看青龙；天空主市井、约契、奴仆、虚诈之事；玄武主盗贼、亡失、争斗、奸诈之事。",
+          "application": "本问求尾款，故取青龙为财帛线索；客户口头答应结清属于约契，取干上未乘天空；初传父母为文书、凭据类，乘玄武，成为检查付款承诺和凭据可靠性的观察点。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "voids",
+            "reading-qinglong-location",
+            "lesson-1",
+            "reading-lesson-1-general",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "transmission-3"
+          ],
+          "assessmentIds": [
+            "principle-wealth-qinglong",
+            "principle-cuiyan-general-tiankong",
+            "principle-cuiyan-general-xuanwu"
+          ],
+          "clauseIds": [
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-general-tiankong:quote",
+            "cuiyan-general-xuanwu:quote"
+          ]
+        },
+        {
+          "id": "reason-4",
+          "stage": "generals",
+          "title": "财帛与文书助力线索",
+          "literalMeaning": "求财最要视青龙；青龙主官府升迁、书契、财帛、谷米、婚姻、喜庆；太常主印绶冠裳、饮食、婚姻、财物、五谷；太阴主妇女奴婢、财帛、嫁娶、阴私；得位、禄、生、合等神则为吉，陷空、墓、克、冲、绝等神则凶。",
+          "application": "本课青龙乘午临未且所乘支不旬空，四课见青龙；中传酉乘太常，太常带财物类象；第3课亥乘太阴，也带财帛阴私类象。初传戌土又生庚金，显示尾款事项在财帛和文书层面有助力线索。但这些只是类象和支持条件，不能当作今天必然到账的保证。",
+          "contribution": "supports",
+          "factIds": [
+            "day",
+            "voids",
+            "reading-qinglong-location",
+            "lesson-2",
+            "reading-lesson-2-general",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "lesson-3",
+            "reading-lesson-3-general"
+          ],
+          "assessmentIds": [
+            "principle-wealth-qinglong",
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-taichang",
+            "principle-cuiyan-general-taiyin",
+            "principle-combined-conditions"
+          ],
+          "clauseIds": [
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-taichang:quote",
+            "cuiyan-general-taiyin:quote",
+            "cuiyan-combined-conditions:quote"
+          ]
+        },
+        {
+          "id": "reason-5",
+          "stage": "generals",
+          "title": "约契与凭据带虚诈争竞类象",
+          "literalMeaning": "天空主市井、约契、奴仆、虚诈之事；玄武主盗贼、亡失、争斗、奸诈之事。",
+          "application": "干上未乘天空，而本问的“客户答应结清尾款”正属约契承诺，天空类象使口头承诺不能直接等同已付款；初传父母为文书凭据类，乘玄武，提示付款凭据、账目或沟通层面可能有争鬪奸诈类象。这里只作传统类象，不指认客户必然欺骗，但足以限制“今天必到”的判断。",
+          "contribution": "opposes",
+          "factIds": [
+            "lesson-1",
+            "reading-lesson-1-general",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "lesson-4",
+            "reading-lesson-4-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-tiankong",
+            "principle-cuiyan-general-xuanwu"
+          ],
+          "clauseIds": [
+            "cuiyan-general-tiankong:quote",
+            "cuiyan-general-xuanwu:quote"
+          ]
+        },
+        {
+          "id": "reason-6",
+          "stage": "conditions",
+          "title": "青龙不入传、末传白虎与三传六亲限制确定性",
+          "literalMeaning": "白虎主道路、杀伐、疾病、刑戮、血光之事；求财最要视青龙；合看有利与受阻条件时，要把生克、旬空等条件落实到具体所问。",
+          "application": "本课青龙只在四课，实际不入初、中、末传；末传申乘白虎，带道路争竞催促类象；三传六亲为父母、兄弟、兄弟，未见财爻类象。按已核原则，青龙不入传本身不能断钱款未落实或必延期，比和也只是同五行关系，不能推成动力弱；但它们合起来限制“今天确定全额到账”的把握，提示尾款主流程未由青龙直接贯穿，末端还须防催促和沟通摩擦。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-qinglong-location",
+            "transmission-1",
+            "transmission-2",
+            "reading-transmission-2-day",
+            "reading-transmission-3-day",
+            "reading-chain-2"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-baihu",
+            "principle-wealth-qinglong",
+            "principle-combined-conditions"
+          ],
+          "clauseIds": [
+            "cuiyan-general-baihu:quote",
+            "cuiyan-wealth-qinglong:quote",
+            "cuiyan-combined-conditions:quote"
+          ]
+        },
+        {
+          "id": "reason-7",
+          "stage": "conditions",
+          "title": "旬空不能拿来断今天落空",
+          "literalMeaning": "综合判断时，得位、禄、生、合等为吉，陷空、墓、克、冲、绝等为凶；旬空属于需要落实到具体位置看的限制条件。",
+          "application": "本课旬空为辰、巳，但三传戌、酉、申本支均不旬空，青龙所乘午也不旬空，故不能以旬空断今天收不到或款项落空。占时巳虽属旬空，但本问没有提供针对占时的已核断法，不能把占时旬空解释成今天落空。此处只说明旬空限制未落在三传及青龙所乘支。",
+          "contribution": "limits",
+          "factIds": [
+            "voids",
+            "reading-transmission-1-detail",
+            "reading-transmission-2-detail",
+            "reading-transmission-3-detail",
+            "reading-qinglong-location"
+          ],
+          "assessmentIds": [
+            "principle-combined-conditions",
+            "principle-wealth-qinglong"
+          ],
+          "clauseIds": [
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-wealth-qinglong:quote"
+          ]
+        }
+      ],
+      "synthesis": {
+        "text": "综合看，支持项与限制项同时存在，所以不能取“今天必到”或“今天必不到”。青龙、太常、太阴和初传生我，支持尾款事项有财帛与文书助力；三传与青龙所乘支不旬空，也排除了以旬空断今日落空的用法。但天空在干上、玄武在初传父母，使客户口头承诺和付款凭据都带虚诈争鬪类象，末传白虎又提示流程末端易有催促摩擦。中末与日干比和只是同五行关系，按已核原则不能据此推成延迟或动力不足；青龙不入三传也不能被推成钱款未落实或必延期，只降低“今日确定入账”的把握。因此今天若未先核实实际付款动作，传统象义不支持确认收到；若客户已发起转账，仍应依凭据再作核对。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5",
+          "reason-6",
+          "reason-7"
+        ]
+      },
+      "advice": [
+        {
+          "action": "今天先向客户索取转账凭证、银行受理号或付款截图，并自行核对账户到账记录，不要把口头“答应结清”直接当成已付款。",
+          "purpose": "干上乘天空、初传父母乘玄武，约契与文书凭据带虚诈不实类象，先核对实际付款动作可避免把承诺误判为到账。",
+          "reasoningIds": ["reason-5"]
+        },
+        {
+          "action": "若尚未到账，用书面消息确认对方具体付款时间、金额和账户信息，保留沟通记录，避免催收语气升级为争执。",
+          "purpose": "末传白虎带道路争竞催促类象，书面留痕能减少末端沟通摩擦，也便于后续核对。",
+          "reasoningIds": ["reason-6"]
+        },
+        {
+          "action": "把今天的目标定为“核实是否已发起付款并确认入账”，若未到账则按原约定继续跟进，不把今天当成确定结清日。",
+          "purpose": "青龙有财帛线索但不入三传，有利与限制并见，今天到账缺乏确定支持，先核实再跟进更符合本课取舍。",
+          "reasoningIds": ["reason-4", "reason-6"]
+        }
+      ],
+      "limitations": [
+        "客户实际付款能力、账户状态、是否已发起转账均未在问题中提供，本课不能确认这些现实条件。",
+        "年命填实未判，得位、禄、旺衰等细则本轮未完整核定，不能把未核条件当作已满足或已排除。",
+        "占时巳支在旬空，但本问没有针对占时的已核断法，不能据此断今日落空；三传不空只说明旬空限制未落在三传及青龙所乘支。",
+        "三传中末比和只是已算出的五行关系，不据此推延迟或动力弱；精确到账应期未由已核条文给出。"
+      ]
+    }
+  },
+  {
+    "manualInput": {
+      "daytime": true,
+      "dayBranch": "子",
+      "dayStem": "庚",
+      "monthGeneral": "辰",
+      "hourBranch": "未"
+    },
+    "category": "career",
+    "interpretation": {
+      "summary": "按本课所据传统象义，这次面试呈有利与限制并见的混合倾向。初传午为官鬼乘青龙，中传卯木、末传子水递生初传，官鬼得生且青龙主官府升迁喜庆，朱雀临中传主文书消息，说明面试沟通和职位消息有传统吉象。但初传官鬼克日干庚金，表示考核压力和对自身要求高；末传子水子孙克午火官鬼，传统求官中子孙制官，结果可能被削弱或非一路顺遂；四课又见勾陈、螣蛇，提示过程易有紧张、追问或拖延。故不能断为必过，偏顺中带阻，关键仍看临场表现与岗位匹配。",
+      "tendency": "mixed",
+      "focus": [
+        {
+          "id": "focus-1",
+          "title": "本次取用",
+          "explanation": "以日干庚为求问者自身，初传午官鬼青龙为技术岗位面试与职位考核，中传卯妻财朱雀为文书消息与待遇，末传子子孙天后为结果趋势；三传午→卯→子按发端、转移、归结组织，但不把阶段直接当作已发生事实。",
+          "factIds": [
+            "day",
+            "voids",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": [
+            "principle-three-stages",
+            "principle-combined-conditions",
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-zhuque",
+            "principle-cuiyan-general-tianhou"
+          ],
+          "clauseIds": [
+            "cuiyan-three-stages:quote",
+            "cuiyan-combined-conditions:quote",
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-zhuque:quote",
+            "cuiyan-general-tianhou:quote"
+          ]
+        }
+      ],
+      "reasoning": [
+        {
+          "id": "reason-1",
+          "stage": "selection",
+          "title": "取用与三传组织",
+          "literalMeaning": "十干寄宫口诀说明各天干按固定位置寄宫，排四课不用四正神；比用取传是取天盘与日干比和者发用，阳日用阳支、阴日用阴支，若都比或都不比再用涉害等法；初传为发端，中传为转移，末传为归结。",
+          "application": "本课庚子日，按寄宫成四课，按比用取午为初传，三传午→卯→子。所问为面试，故以初传为面试考核开端，中传为消息与转折，末传为归结；但此仅确定组织框架，不直接证明现实吉凶。",
+          "contribution": "describes",
+          "factIds": [
+            "day",
+            "lesson-1",
+            "lesson-2",
+            "lesson-3",
+            "lesson-4",
+            "method",
+            "transmission-1",
+            "transmission-2",
+            "transmission-3",
+            "reading-transmission-1-detail",
+            "reading-transmission-2-detail",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": [
+            "procedure-jigong",
+            "procedure-transmissions",
+            "principle-three-stages"
+          ],
+          "clauseIds": [
+            "daquan-jigong:quote",
+            "daquan-biyong:quote",
+            "cuiyan-three-stages:quote"
+          ]
+        },
+        {
+          "id": "reason-2",
+          "stage": "conditions",
+          "title": "官鬼得递生为有利线索",
+          "literalMeaning": "遇到得位、禄、生、合等神则吉，遇到陷空、墓、克、冲、绝等神则凶。",
+          "application": "本课初传午为官鬼，可对应所问职位与面试考核；中传卯木生初传午火，末传子水生中传卯木，形成末→中→初的递生，官鬼有生助，初传不空且乘青龙。按传统象义，这是面试通过和职位消息的有利线索，但只是盘面关系，不等于现实已录用。",
+          "contribution": "supports",
+          "factIds": [
+            "day",
+            "voids",
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "transmission-2",
+            "reading-transmission-2-detail",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-3",
+          "stage": "conditions",
+          "title": "官鬼克身与子孙制官构成限制",
+          "literalMeaning": "遇到得位、禄、生、合等神则吉，遇到陷空、墓、克、冲、绝等神则凶。",
+          "application": "初传午火克日干庚金，官鬼克身，说明面试对求问者有压力、审查较严；末传子水为子孙，能克初传午火官鬼，传统求官中子孙制官，提示结果可能被削弱、非直接顺成，或最终职位条件不如初想；中传卯木又被日干庚金所克，待遇或成果需自身耗力争取。这些使结论不能断为必过。",
+          "contribution": "limits",
+          "factIds": [
+            "day",
+            "transmission-1",
+            "reading-transmission-1-day",
+            "transmission-2",
+            "reading-transmission-2-day",
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "reading-transmission-3-day",
+            "reading-chain-1",
+            "reading-chain-2"
+          ],
+          "assessmentIds": ["principle-combined-conditions"],
+          "clauseIds": ["cuiyan-combined-conditions:quote"]
+        },
+        {
+          "id": "reason-4",
+          "stage": "generals",
+          "title": "青龙朱雀对面试与消息的吉象",
+          "literalMeaning": "青龙主官府升迁、书契、财帛、谷米、婚姻、喜庆等事；朱雀主文书、敕命、消息、口舌、词讼之事。",
+          "application": "初传官鬼乘青龙，官鬼可对应职位与面试考核，青龙取象中有官府升迁、书契喜庆，可视为求职面试的有利线索；中传妻财乘朱雀，朱雀主文书消息，对应面试沟通、评价通知、材料表达。二者支持有通过和收到消息的倾向，但天将类象不是事实已发生的证据。",
+          "contribution": "supports",
+          "factIds": [
+            "transmission-1",
+            "reading-transmission-1-detail",
+            "lesson-4",
+            "reading-lesson-4-general",
+            "transmission-2",
+            "reading-transmission-2-detail"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-qinglong",
+            "principle-cuiyan-general-zhuque"
+          ],
+          "clauseIds": [
+            "cuiyan-general-qinglong:quote",
+            "cuiyan-general-zhuque:quote"
+          ]
+        },
+        {
+          "id": "reason-5",
+          "stage": "generals",
+          "title": "其余天将给过程与结果加限制",
+          "literalMeaning": "天后主庆赏恩泽阴私之事；勾陈主战斗词讼争端勾留；螣蛇主火烛血光惊恐怪异；太常主印绶冠裳饮食婚姻财物五谷。",
+          "application": "末传子孙乘天后，子孙在求官中制官鬼，但天后有恩泽缓和；四课见勾陈、螣蛇，提示面试过程可能有紧张、追问、程序拖延或临场怪题；太常临第三课，涉及资格、礼仪、待遇等话题。这些不单独定成败，但说明过程未必轻松，结果也可能受非公开因素或条件影响。",
+          "contribution": "limits",
+          "factIds": [
+            "transmission-3",
+            "reading-transmission-3-detail",
+            "lesson-1",
+            "reading-lesson-1-general",
+            "lesson-2",
+            "reading-lesson-2-general",
+            "lesson-3",
+            "reading-lesson-3-general"
+          ],
+          "assessmentIds": [
+            "principle-cuiyan-general-tianhou",
+            "principle-cuiyan-general-gouchen",
+            "principle-cuiyan-general-tengshe",
+            "principle-cuiyan-general-taichang"
+          ],
+          "clauseIds": [
+            "cuiyan-general-tianhou:quote",
+            "cuiyan-general-gouchen:quote",
+            "cuiyan-general-tengshe:quote",
+            "cuiyan-general-taichang:quote"
+          ]
+        }
+      ],
+      "synthesis": {
+        "text": "综合取有利与限制并见。有利材料是：初传官鬼青龙，官鬼为职位与考核，青龙主官府升迁喜庆；中传朱雀主文书消息；中末递生初传，官鬼有生助；关键三传不空。限制材料是：初传官鬼克日干，面试压力大；末传子孙克官鬼，传统求官忌子孙制官，结果可能被削弱或非直线顺成；四课勾陈螣蛇提示紧张勾留。三阶段框架只用于组织，不证明现实阶段。旬空辰巳不落三传，故关键发端未见空象；但年命未填实未判，不能据此加强。若面试表现、岗位匹配和竞争情况未补充，本课只能给偏顺带阻的传统定性，不能断必过。",
+        "reasoningIds": [
+          "reason-1",
+          "reason-2",
+          "reason-3",
+          "reason-4",
+          "reason-5"
+        ]
+      },
+      "advice": [
+        {
+          "action": "针对可能的高压追问和临场怪题，做两轮技术模拟面，重点练项目细节、边界条件和故障排查表达。",
+          "purpose": "官鬼克身、勾陈螣蛇提示考核压力与紧张问答，提前演练可减少临场受制。",
+          "reasoningIds": ["reason-3", "reason-5"]
+        },
+        {
+          "action": "整理一份项目或技术方案说明，面试中主动讲清架构、取舍和结果，面试后按流程发感谢或补充材料。",
+          "purpose": "朱雀主文书消息，中传妻财乘朱雀，文书表达与消息沟通是本课有利取用点。",
+          "reasoningIds": ["reason-4"]
+        },
+        {
+          "action": "对薪资、级别和入职条件保留弹性，同时继续保留其他机会；若结果延后，先跟进确认而非立刻认定失败。",
+          "purpose": "末传子孙制官且天后再现恩泽，结果可能有条件压制或延后缓和，不宜把单次面试当唯一出路。",
+          "reasoningIds": ["reason-3", "reason-5"]
+        }
+      ],
+      "limitations": [
+        "年命未填实未判：资料未提供年命及其填实情况，不能据此加强或削弱本课结论。",
+        "面试形式、岗位竞争程度、个人准备状态与考官态度未提供，课象只能给出传统象义倾向，不能替代现实判断。",
+        "旺衰、得位、禄墓冲绝等细则本次未完整核定，不能自行补算后声称某传已旺或已绝。",
+        "目标未能逐字对应问题原话，仍属未知；未补充前不把它当作已满足条件。"
+      ]
+    }
+  }
+]

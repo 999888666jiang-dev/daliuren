@@ -117,7 +117,7 @@ export default function App() {
       const comparison =
         input.longitude !== undefined ? cast(comparedInput(input)) : undefined;
       const draft: Report = {
-        schemaVersion: 2,
+        schemaVersion: 3,
         id: crypto.randomUUID(),
         categoryChoice,
         intent,
@@ -158,7 +158,7 @@ export default function App() {
       const intent = localIntent(question, categoryChoice);
       const category = intent.category;
       finish({
-        schemaVersion: 2,
+        schemaVersion: 3,
         id: crypto.randomUUID(),
         categoryChoice,
         intent,
@@ -184,7 +184,7 @@ export default function App() {
       const chart = withPersonalContext(base.chart, input.natal, input.annual);
       const intent = localIntent(input.question, input.category);
       finish({
-        schemaVersion: 2,
+        schemaVersion: 3,
         id: crypto.randomUUID(),
         question: input.question,
         categoryChoice: input.category,

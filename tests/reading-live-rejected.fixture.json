@@ -1,0 +1,188 @@
+{
+  "manualInput": {
+    "daytime": true,
+    "dayBranch": "子",
+    "dayStem": "庚",
+    "monthGeneral": "辰",
+    "hourBranch": "巳"
+  },
+  "interpretation": {
+    "summary": "按本课所据传统象义，今天能否收到尾款偏阻，不宜断为当日到账。主要原因是三传戌→酉→申虽见初传父母生庚、中末与日干比和，但初传玄武主虚诈争鬪，第一课天空又主约契虚诈，客户承诺本身带未落实之象；末传白虎主道路杀伐，收束阶段阻力明显。综合看，回款有推进线索，但当日到账依据不足。",
+    "tendency": "unfavorable",
+    "focus": [
+      {
+        "id": "focus-1",
+        "title": "以日干为收款方、三传为回款进程",
+        "explanation": "问题问今天能否收到客户结清的尾款，取日干庚为收款方，尾款为所问对象，三传戌酉申为回款从发端到收束的进程。已核原则允许按三传组织起因、发展与收束，并结合生克、六亲、天将、旬空推演；不另立专门类神。",
+        "factIds": [
+          "day",
+          "transmission-1",
+          "transmission-2",
+          "transmission-3",
+          "voids"
+        ],
+        "assessmentIds": [
+          "principle-three-stages",
+          "principle-combined-conditions"
+        ],
+        "clauseIds": [
+          "cuiyan-three-stages:quote",
+          "cuiyan-combined-conditions:quote"
+        ]
+      },
+      {
+        "id": "focus-2",
+        "title": "以玄武、天空、白虎取承诺与收束之象",
+        "explanation": "客户答应结清尾款，涉及约契与承诺是否落实。四课第一课未乘天空，初传戌乘玄武，末传申乘白虎，分别对应约契虚诈、争鬪奸诈与收束阻力，作为本次取用的天将线索。",
+        "factIds": [
+          "lesson-1",
+          "reading-lesson-1-general",
+          "transmission-1",
+          "reading-transmission-1-detail",
+          "transmission-3",
+          "reading-transmission-3-detail"
+        ],
+        "assessmentIds": [
+          "principle-cuiyan-general-tiankong",
+          "principle-cuiyan-general-xuanwu",
+          "principle-cuiyan-general-baihu"
+        ],
+        "clauseIds": [
+          "cuiyan-general-tiankong:quote",
+          "cuiyan-general-xuanwu:quote",
+          "cuiyan-general-baihu:quote"
+        ]
+      }
+    ],
+    "reasoning": [
+      {
+        "id": "reason-1",
+        "stage": "selection",
+        "title": "三传显示回款有推进但非当日即结",
+        "literalMeaning": "初传是事情的发端，中传是转移变化，末传是归结收束。",
+        "application": "本课三传戌→酉→申，说明尾款事项有从发端到收束的过程，不是一蹴而就；今天处于过程之中，不能仅凭客户口头承诺断为当日到账。",
+        "contribution": "limits",
+        "factIds": ["transmission-1", "transmission-2", "transmission-3"],
+        "assessmentIds": ["principle-three-stages"],
+        "clauseIds": ["cuiyan-three-stages:quote"]
+      },
+      {
+        "id": "reason-2",
+        "stage": "transmissions",
+        "title": "初传父母生庚，有回款线索",
+        "literalMeaning": "得位、禄、生合等有利条件则吉，陷空、墓、克、冲、绝等不利条件则凶。",
+        "application": "初传戌土为父母，戌土生庚金，是回款事项中支持收款方的线索，说明客户承诺并非全无根据；但原句并列多种条件，本次未完整核定旺衰墓绝，不能仅凭此一项断为必成。",
+        "contribution": "supports",
+        "factIds": [
+          "transmission-1",
+          "reading-transmission-1-detail",
+          "reading-transmission-1-day"
+        ],
+        "assessmentIds": ["principle-combined-conditions"],
+        "clauseIds": ["cuiyan-combined-conditions:quote"]
+      },
+      {
+        "id": "reason-3",
+        "stage": "transmissions",
+        "title": "中末比和，后续趋于平缓",
+        "literalMeaning": "中传为转移，末传为归结；比和表示五行相同、无强烈生克。",
+        "application": "中传酉金、末传申金与日干庚金比和，说明回款推进到中后段时，力量转为平缓，缺少当日强力到账的推动；比和本身不是凶，但也不足以支持今天必到。",
+        "contribution": "limits",
+        "factIds": [
+          "transmission-2",
+          "reading-transmission-2-day",
+          "transmission-3",
+          "reading-transmission-3-day",
+          "reading-chain-2"
+        ],
+        "assessmentIds": [
+          "principle-three-stages",
+          "principle-combined-conditions"
+        ],
+        "clauseIds": [
+          "cuiyan-three-stages:quote",
+          "cuiyan-combined-conditions:quote"
+        ]
+      },
+      {
+        "id": "reason-4",
+        "stage": "generals",
+        "title": "玄武临初传，承诺带虚诈争鬪之象",
+        "literalMeaning": "玄武主盗贼、亡失、争鬪、奸诈之事。",
+        "application": "初传戌乘玄武，对应客户承诺结清尾款这一发端环节，提示口头答应可能含拖延、争议或未落实成分；不能据此指认客户一定欺诈，但足以降低当日到账的确定性。",
+        "contribution": "opposes",
+        "factIds": ["transmission-1", "reading-transmission-1-detail"],
+        "assessmentIds": ["principle-cuiyan-general-xuanwu"],
+        "clauseIds": ["cuiyan-general-xuanwu:quote"]
+      },
+      {
+        "id": "reason-5",
+        "stage": "generals",
+        "title": "天空临第一课，约契虚诈之象",
+        "literalMeaning": "天空主市井、约契、奴仆、虚诈之事。",
+        "application": "第一课未乘天空，正对应客户答应结清尾款这一约契环节，说明承诺本身有虚而不实之象；与初传玄武相呼应，进一步削弱今天到账的判断。",
+        "contribution": "opposes",
+        "factIds": ["lesson-1", "reading-lesson-1-general"],
+        "assessmentIds": ["principle-cuiyan-general-tiankong"],
+        "clauseIds": ["cuiyan-general-tiankong:quote"]
+      },
+      {
+        "id": "reason-6",
+        "stage": "generals",
+        "title": "白虎临末传，收束阶段有阻力",
+        "literalMeaning": "白虎主道路、杀伐、疾病、刑戮、血光之事。",
+        "application": "末传申乘白虎，是回款事项的归结位置，提示收束阶段并非顺畅到账，而可能伴随催讨、争执或延迟；白虎类象不直接等于现实伤害，但作为收束阻力线索，不支持今天必到。",
+        "contribution": "opposes",
+        "factIds": ["transmission-3", "reading-transmission-3-detail"],
+        "assessmentIds": ["principle-cuiyan-general-baihu"],
+        "clauseIds": ["cuiyan-general-baihu:quote"]
+      },
+      {
+        "id": "reason-7",
+        "stage": "conditions",
+        "title": "旬空与天将类象只作限制，不作独断",
+        "literalMeaning": "综合合看有利与受阻条件，不能仅因见生就断必成、见克或空就断必败。",
+        "application": "本课辰、巳旬空，占时巳时落空，说明今天这一时间锚本身带空象；但旬空不是唯一判据，需与三传生克、天将合看。综合后仍以偏阻为主，同时保留客户后续补足条件后回款的可能。",
+        "contribution": "limits",
+        "factIds": [
+          "voids",
+          "hour",
+          "transmission-1",
+          "transmission-2",
+          "transmission-3"
+        ],
+        "assessmentIds": ["principle-combined-conditions"],
+        "clauseIds": ["cuiyan-combined-conditions:quote"]
+      }
+    ],
+    "synthesis": {
+      "text": "本课以日干庚为收款方，三传戌酉申为回款进程。初传父母生庚，是支持回款的线索；但初传玄武主虚诈争鬪，第一课天空主约契虚诈，客户承诺本身带未落实之象；中末比和，后续推动平缓；末传白虎主收束阻力；占时巳又落旬空。有利与不利并见，但不利集中在承诺落实与收束环节，故今天到账偏阻。若客户实际已走完付款流程、或到账凭证已出，则本课限制条件可被现实事实改变，仍需以银行到账为准。",
+      "reasoningIds": [
+        "reason-1",
+        "reason-2",
+        "reason-3",
+        "reason-4",
+        "reason-5",
+        "reason-6",
+        "reason-7"
+      ]
+    },
+    "advice": [
+      {
+        "action": "今天可再向客户确认付款是否已提交、有无回单或流水号，并保留书面沟通记录。",
+        "purpose": "天空与玄武同显于约契、发端环节，说明口头承诺需以可核实的付款动作补强。",
+        "reasoningIds": ["reason-4", "reason-5"]
+      },
+      {
+        "action": "若今天未到账，把跟进重点放在明确付款日期与未付原因，而不是反复追问“今天能不能到”。",
+        "purpose": "中末比和、末传白虎提示收束阶段平缓且有阻力，明确节点比当日催逼更符合课象。",
+        "reasoningIds": ["reason-3", "reason-6"]
+      }
+    ],
+    "limitations": [
+      "客户实际付款进度、是否已提交转账、银行处理时效等现实信息未提供，课象不能替代到账查询。",
+      "本课未完整核定旺衰、墓绝、禄马等细则，天将类象只作线索，不指认客户主观恶意。",
+      "年命未填实，不能据本课断定具体到账日或具体人物行为。"
+    ]
+  }
+}

@@ -125,12 +125,18 @@ describe("versioned, defensively projected reports", () => {
     expect(result.chart).toEqual(old.chart);
     expect(result.categoryChoice).toBe("career");
   });
-  it("deduplicates by createdAt with valid v2 taking precedence and caps at thirty", () => {
+  it("deduplicates by report ID, keeps different reports at one instant, and caps at thirty", () => {
     stored.set(oldKey, JSON.stringify([legacy()]));
     const replacement = { ...report(), question: "我下周的面试安排如何？" };
     stored.set(key, JSON.stringify([replacement]));
+    expect(readReports()).toHaveLength(2);
+    expect(readReports().find((r) => r.id === replacement.id)!.question).toBe(
+      replacement.question,
+    );
+    const migrated = { ...replacement, id: normalizeReport(legacy())!.id };
+    stored.set(key, JSON.stringify([migrated]));
     expect(readReports()).toHaveLength(1);
-    expect(readReports()[0].question).toBe(replacement.question);
+    expect(readReports()[0].question).toBe(migrated.question);
     for (let i = 0; i < 34; i++)
       saveReport(report(new Date(Date.UTC(2026, 8, 24, 0, i)).toISOString()));
     expect(readReports()).toHaveLength(30);
@@ -359,12 +365,16 @@ describe("storage failures and export", () => {
     expect(stored.get(key)).toBe("broken");
   });
   it("removes a report from both versions and preserves unrelated records", () => {
+    const migratedId = normalizeReport(legacy())!.id;
     stored.set(oldKey, JSON.stringify([legacy()]));
     stored.set(
       key,
-      JSON.stringify([report(), report("2026-09-24T02:00:00.000Z")]),
+      JSON.stringify([
+        { ...report(), id: migratedId },
+        report("2026-09-24T02:00:00.000Z"),
+      ]),
     );
-    removeReport(report().createdAt);
+    removeReport(migratedId);
     expect(JSON.parse(stored.get(oldKey)!)).toEqual([]);
     expect(readReports()).toHaveLength(1);
     expect(readReports()[0].createdAt).toBe("2026-09-24T02:00:00.000Z");
@@ -378,7 +388,7 @@ describe("storage failures and export", () => {
       if (k === oldKey) throw new DOMException("denied", "SecurityError");
       stored.set(k, value);
     });
-    expect(() => removeReport(report().createdAt)).toThrow();
+    expect(() => removeReport(report().id)).toThrow();
     expect(stored.get(key)).toBe(previous);
     expect(stored.get(oldKey)).toBe(old);
   });

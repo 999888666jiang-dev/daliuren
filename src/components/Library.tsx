@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { ArrowLeft, Search, ExternalLink } from "lucide-react";
 import { bibliography, evidence } from "../data/evidence";
+import { readingEvidence } from "../data/reading-evidence";
 import { bifaIndex } from "../data/bifa-index";
 import { Evidence, imageHref } from "./Evidence";
 export function Library({ sourceId }: { sourceId?: string }) {
+  const catalog = [
+    ...new Map(
+      [...evidence, ...readingEvidence].map((item) => [item.id, item]),
+    ).values(),
+  ];
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState<"quotes" | "bifa">("quotes");
-  const selected = sourceId ? evidence.find((e) => e.id === sourceId) : null;
-  const found = evidence.filter((e) =>
+  const selected = sourceId ? catalog.find((e) => e.id === sourceId) : null;
+  const found = catalog.filter((e) =>
     `${e.title}${e.quote}${e.work}`.includes(query.trim()),
   );
   if (sourceId)
@@ -57,7 +63,7 @@ export function Library({ sourceId }: { sourceId?: string }) {
             <h2>{tab === "quotes" ? "已核原文" : "毕法百则索引"}</h2>
             <span className="muted small">
               {tab === "quotes"
-                ? `${evidence.filter((e) => e.verification === "verified").length} 条可回查`
+                ? `${catalog.filter((e) => e.verification === "verified").length} 条可回查`
                 : "100 条题名 · 逐项标注"}
             </span>
           </div>

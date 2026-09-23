@@ -34,7 +34,7 @@ export function History({
       ) : (
         <div className="history-list">
           {items.map((r) => (
-            <article key={r.createdAt}>
+            <article key={r.id}>
               <div>
                 <span className="small muted">
                   {r.chart.time ? timeText(r.chart.time.beijing) : "古课复核"} ·{" "}
@@ -59,7 +59,7 @@ export function History({
                 </button>
                 <button
                   className="icon-button"
-                  onClick={() => setPending(r.createdAt)}
+                  onClick={() => setPending(r.id)}
                   aria-label="删除这份本机报告"
                 >
                   <Trash2 size={17} />
@@ -67,13 +67,13 @@ export function History({
                 <button className="text-button" onClick={() => onOpen(r)}>
                   查看 <ArrowRight size={16} />
                 </button>
-                {pending === r.createdAt && (
+                {pending === r.id && (
                   <div className="delete-confirm">
                     <span>删除这份本机记录？</span>
                     <button
                       onClick={() => {
                         try {
-                          removeReport(r.createdAt);
+                          removeReport(r.id);
                           const remaining = readReports();
                           setItems(remaining);
                           onChange(remaining);

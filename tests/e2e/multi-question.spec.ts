@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 const records = (page: Page) =>
   page.evaluate(() =>
-    JSON.parse(localStorage.getItem("guanxiang.reports.v2") || "[]"),
+    JSON.parse(localStorage.getItem("guanxiang.reports.v3") || "[]"),
   );
 async function fill(page: Page, question: string) {
   await page.goto("./");

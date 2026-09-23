@@ -1,0 +1,184 @@
+[
+  {
+    "question": "我下周参加技术岗位面试，笔试已经通过，这次面试能顺利通过吗？",
+    "response": {
+      "category": "career",
+      "coreQuestion": "下周技术岗位面试能否顺利通过",
+      "subject": null,
+      "object": "技术岗位面试",
+      "goal": "了解这次面试能否顺利通过",
+      "timeframe": "下周",
+      "background": ["笔试已经通过"],
+      "missingInformation": [],
+      "clarifications": [],
+      "categoryReason": "问题是求职面试结果，证据路由使用求职事业类别。",
+      "status": "ready",
+      "source": "model",
+      "meaning": {
+        "version": "meaning-v1",
+        "topicLabel": {
+          "value": "面试结果",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "这次面试能顺利通过吗"
+            }
+          ]
+        },
+        "questionKind": "outcome",
+        "focus": {
+          "value": "下周技术岗位面试能否顺利通过",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "我下周参加技术岗位面试"
+            }
+          ]
+        },
+        "subject": {
+          "value": "本人",
+          "basis": "default_self",
+          "refs": [],
+          "role": "self"
+        },
+        "action": {
+          "value": "参加面试",
+          "basis": "explicit",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "参加技术岗位面试"
+            }
+          ]
+        },
+        "objects": [
+          {
+            "value": "技术岗位面试",
+            "basis": "explicit",
+            "refs": [
+              {
+                "source": "question",
+                "quote": "技术岗位面试"
+              }
+            ]
+          }
+        ],
+        "goal": {
+          "value": "了解这次面试能否顺利通过",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "这次面试能顺利通过吗"
+            }
+          ]
+        },
+        "time": {
+          "value": "下周",
+          "basis": "explicit",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "下周"
+            }
+          ],
+          "dateBasis": "relative",
+          "period": null
+        }
+      }
+    }
+  },
+  {
+    "question": "我想报名周末的陶艺体验课，第一次学，去参加是否合适？",
+    "response": {
+      "category": "general",
+      "coreQuestion": "第一次学陶艺，报名参加周末陶艺体验课是否合适",
+      "subject": null,
+      "object": "周末的陶艺体验课",
+      "goal": "判断第一次学陶艺去参加是否合适",
+      "timeframe": "周末",
+      "background": ["第一次学"],
+      "missingInformation": [],
+      "clarifications": [],
+      "categoryReason": "问题是具体生活活动的参与选择，证据路由使用一般事项。",
+      "status": "ready",
+      "source": "model",
+      "meaning": {
+        "version": "meaning-v1",
+        "topicLabel": {
+          "value": "体验课选择",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "陶艺体验课"
+            }
+          ]
+        },
+        "questionKind": "evaluation",
+        "focus": {
+          "value": "第一次学陶艺，报名参加周末陶艺体验课是否合适",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "我想报名周末的陶艺体验课，第一次学，去参加是否合适？"
+            }
+          ]
+        },
+        "subject": {
+          "value": "本人",
+          "basis": "default_self",
+          "refs": [],
+          "role": "self"
+        },
+        "action": {
+          "value": "报名参加",
+          "basis": "explicit",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "报名"
+            }
+          ]
+        },
+        "objects": [
+          {
+            "value": "周末的陶艺体验课",
+            "basis": "explicit",
+            "refs": [
+              {
+                "source": "question",
+                "quote": "周末的陶艺体验课"
+              }
+            ]
+          }
+        ],
+        "goal": {
+          "value": "了解第一次学陶艺去参加是否合适",
+          "basis": "paraphrase",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "第一次学，去参加是否合适？"
+            }
+          ]
+        },
+        "time": {
+          "value": "周末",
+          "basis": "explicit",
+          "refs": [
+            {
+              "source": "question",
+              "quote": "周末"
+            }
+          ],
+          "dateBasis": "unspecified",
+          "period": null
+        }
+      }
+    }
+  }
+]
