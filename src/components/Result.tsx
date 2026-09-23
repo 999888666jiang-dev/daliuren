@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   Bookmark,
@@ -6,11 +6,9 @@ import {
   ChevronDown,
   Download,
   Printer,
-  Sparkles,
 } from "lucide-react";
 import { ENGINE_VERSION, RULE_VERSION } from "../core";
-import { CORPUS_VERSION, matchBifa, selectEvidence } from "../data/evidence";
-import type { Interpretation } from "../core/types";
+import { CORPUS_VERSION, matchBifa } from "../data/evidence";
 import {
   categories,
   exportReport,
@@ -20,15 +18,19 @@ import {
 } from "../lib/report";
 import { Plate } from "./Plate";
 import { Evidence } from "./Evidence";
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || "")
-  .trim()
-  .replace(/\/$/, "");
+import { AiReading } from "./AiReading";
+import { ContinueQuestion, type ContinueInput } from "./ContinueQuestion";
+import { QuestionGuide } from "./QuestionGuide";
 export function Result({
   report,
   onUpdate,
+  onContinue,
+  reports,
 }: {
   report: Report;
   onUpdate: (patch: Partial<Report>) => void;
+  onContinue: (input: ContinueInput) => string | void;
+  reports: Report[];
 }) {
   const { chart } = report;
   const priority = (r: { id: string; ruleIds: string[] }) =>
@@ -37,89 +39,13 @@ export function Result({
       : r.ruleIds.includes(chart.method.name)
         ? 1
         : 2;
-  const records = [
-    ...(report.evidenceSnapshot ?? selectEvidence(chart, report.category)),
-  ].sort((a, b) => priority(a) - priority(b));
+  const records = [...(report.evidenceSnapshot ?? [])].sort(
+    (a, b) => priority(a) - priority(b),
+  );
   const matches = matchBifa(chart, report.category);
   const [saved, setSaved] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const [invite, setInvite] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [apiError, setApiError] = useState("");
-  const [health, setHealth] = useState<
-    "checking" | "ready" | "unavailable" | "not_configured"
-  >(API_BASE ? "checking" : "not_configured");
-  const controller = useRef<AbortController | null>(null);
-  useEffect(() => {
-    if (!API_BASE) return;
-    const c = new AbortController();
-    fetch(`${API_BASE}/api/health`, { signal: c.signal, cache: "no-store" })
-      .then((r) => r.json())
-      .then((data) =>
-        setHealth(data.status === "ready" ? "ready" : "not_configured"),
-      )
-      .catch(() => {
-        if (!c.signal.aborted) setHealth("unavailable");
-      });
-    return () => c.abort();
-  }, []);
-  useEffect(() => () => controller.current?.abort(), []);
-  async function interpret() {
-    if (!chart.input) return;
-    setLoading(true);
-    setApiError("");
-    controller.current?.abort();
-    const c = new AbortController();
-    controller.current = c;
-    const timer = setTimeout(() => c.abort(), 35000);
-    try {
-      const response = await fetch(`${API_BASE}/api/interpret`, {
-        method: "POST",
-        signal: c.signal,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${invite.trim()}`,
-        },
-        body: JSON.stringify({
-          input: chart.input,
-          question: report.question,
-          category: report.category,
-          ruleVersion: RULE_VERSION,
-          corpusVersion: CORPUS_VERSION,
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.error?.message || "解读服务暂时不可用。");
-      if (
-        data.chartId !== chart.id ||
-        !data.interpretation ||
-        typeof data.interpretation.summary !== "string" ||
-        !Array.isArray(data.interpretation.observations) ||
-        !Array.isArray(data.interpretation.advice) ||
-        !Array.isArray(data.interpretation.missingInformation) ||
-        !Array.isArray(data.interpretation.limitations)
-      )
-        throw new Error("返回的课盘或解读格式不一致，请重新起课。");
-      onUpdate({
-        interpretation: data.interpretation as Interpretation,
-        aiMeta: data.meta,
-      });
-      setInvite("");
-      setSaved(false);
-    } catch (err) {
-      if (controller.current === c)
-        setApiError(
-          err instanceof Error && err.name !== "AbortError"
-            ? err.message
-            : "解读等待超时，课盘与原文仍可查看。",
-        );
-    } finally {
-      clearTimeout(timer);
-      if (controller.current === c) setLoading(false);
-    }
-  }
+  useEffect(() => setSaved(false), [report]);
   function save() {
     try {
       saveReport(report);
@@ -146,7 +72,8 @@ export function Result({
   const currentVersion =
     chart.engineVersion === ENGINE_VERSION &&
     chart.ruleVersion === RULE_VERSION &&
-    (!report.corpusVersion || report.corpusVersion === CORPUS_VERSION);
+    report.corpusVersion === CORPUS_VERSION &&
+    Array.isArray(report.evidenceSnapshot);
   return (
     <div className="result-page page-width">
       <div className="result-header">
@@ -185,6 +112,15 @@ export function Result({
         {report.question}
       </p>
       <div className="report-context">
+        <span>
+          {report.consultation?.mode === "reuse"
+            ? "本盘续问 · 不重排"
+            : chart.input?.castMode === "living"
+              ? `报数活时 · ${chart.input.livingNumber} → ${chart.hourBranch}时`
+              : chart.manualInput
+                ? "古课复核"
+                : "正时起课"}
+        </span>
         <span>{categories.find((c) => c.id === report.category)?.long}</span>
         <span>
           {chart.time
@@ -197,12 +133,55 @@ export function Result({
             : chart.ruleVersion}
         </span>
       </div>
+      {chart.input?.castMode === "living" && (
+        <p className="notice">
+          本课以报数 {chart.input.livingNumber} 取虚拟{chart.hourBranch}
+          时；日干支、月将、昼夜仍取真实时刻。报数是备选取法，不保证每次不同，也不保证判断准确。
+        </p>
+      )}
+      {report.consultation?.mode === "reuse" && (
+        <p className="notice">
+          沿用原课 {chart.id}
+          。所问及年命独立记录，四课三传完全保留；本次沿用原盘，未重新起课。原盘对不同事情仍有共同约束。
+        </p>
+      )}
+      {report.consultation?.changeNote && (
+        <p className="notice">
+          本次记录的现实变化：{report.consultation.changeNote}
+        </p>
+      )}
       {chart.engineVersion !== ENGINE_VERSION && (
         <p className="notice">
           这份记录使用引擎 {chart.engineVersion}，保留的是当时的课盘；当前引擎为{" "}
           {ENGINE_VERSION}。
         </p>
       )}
+      {report.warnings?.map((warning, i) => (
+        <p key={i} className="notice">
+          {warning}
+        </p>
+      ))}
+      <section className="answer-brief">
+        {report.interpretation ? (
+          <>
+            <span className="section-eyebrow">本次简答 · AI 现代解读</span>
+            <p>{report.interpretation.summary}</p>
+          </>
+        ) : (
+          <p>课盘已生成。可继续结合具体问题解读，并逐条核对古籍依据。</p>
+        )}
+        <button
+          className="outline-button no-print"
+          onClick={() => {
+            const node = document.getElementById("ai-reading");
+            node?.scrollIntoView({ behavior: "instant", block: "start" });
+            node?.focus({ preventScroll: true });
+          }}
+        >
+          {report.interpretation ? "查看详细解释" : "解读当前问题"}
+        </button>
+      </section>
+      <ContinueQuestion reports={reports} onContinue={onContinue} />
       <div className="result-grid">
         <aside className="chart-column">
           <Plate chart={chart} compact />
@@ -342,142 +321,18 @@ export function Result({
               </p>
             )}
           </section>
-          <section className="reading-section ai-section">
-            <div className="section-heading">
-              <h2>当前问题的解读</h2>
-              <Sparkles size={18} />
-            </div>
-            {report.interpretation ? (
-              <div className="interpretation">
-                <p className="interpretation-summary">
-                  {report.interpretation.summary}
-                </p>
-                <h3>传统解释</h3>
-                {report.interpretation.observations.map((o, i) => (
-                  <div className="observation" key={i}>
-                    <p>{o.text}</p>
-                    <div className="evidence-links">
-                      {o.factIds.map((id) => (
-                        <span key={id}>
-                          {chart.facts.find((f) => f.id === id)?.label || id}
-                        </span>
-                      ))}
-                      {o.evidenceIds.map((id) => (
-                        <a key={id} href={`#/sources/${id}`}>
-                          {records.find((r) => r.id === id)?.title || id} ↗
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-                <h3>
-                  行动建议 <small>现代建议</small>
-                </h3>
-                <ol>
-                  {report.interpretation.advice.map((a, i) => (
-                    <li key={i}>{a}</li>
-                  ))}
-                </ol>
-                {report.interpretation.missingInformation.length > 0 && (
-                  <>
-                    <h3>仍需了解</h3>
-                    <ul>
-                      {report.interpretation.missingInformation.map((s, i) => (
-                        <li key={i}>{s}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-                <p className="muted small">
-                  {report.interpretation.limitations.join(" ")}
-                </p>
-                <p className="version-line">
-                  {report.aiMeta?.model} · {report.aiMeta?.promptVersion} ·{" "}
-                  {report.aiMeta?.corpusVersion}
-                </p>
-              </div>
-            ) : (
-              <div className="ai-empty">
-                <p className="computed-summary">
-                  本课以<span>{chart.method.name}</span>取传，三传为{" "}
-                  <b>{chart.transmissions.map((t) => t.branch).join(" → ")}</b>
-                  。
-                </p>
-                <p>
-                  {!chart.input
-                    ? "人工课例用于排盘复核；在线问事解读请使用时间起课。"
-                    : health === "not_configured"
-                      ? "在线 AI 解读尚未接通。课盘与已核古籍可正常查看，综合解读将在服务配置后开启。"
-                      : "课盘与文献已就绪。AI 将结合你的具体问题解释证据，并给出行动建议。"}
-                </p>
-              </div>
-            )}
-            {!currentVersion && (
-              <p className="notice">
-                这份报告使用较早的规则或文献版本。保留原课盘与引文；如需新的 AI
-                解读，请重新起课。
-              </p>
-            )}
-            {chart.input &&
-              currentVersion &&
-              API_BASE &&
-              health !== "not_configured" && (
-                <form
-                  className="ai-form"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    void interpret();
-                  }}
-                >
-                  <label className="field">
-                    亲友邀请码
-                    <input
-                      aria-label="亲友邀请码"
-                      type="password"
-                      autoComplete="off"
-                      minLength={16}
-                      maxLength={256}
-                      required
-                      value={invite}
-                      onChange={(e) => setInvite(e.target.value)}
-                      placeholder="邀请码只用于本次调用"
-                    />
-                  </label>
-                  <label className="check-label consent">
-                    <input
-                      type="checkbox"
-                      checked={consent}
-                      onChange={(e) => setConsent(e.target.checked)}
-                      required
-                    />
-                    同意将本次问题和必要课盘资料发送给 DeepSeek
-                    生成解读。网站不保存完整问事记录。
-                  </label>
-                  <button
-                    className="primary-button"
-                    type="submit"
-                    disabled={loading || !consent || !invite.trim()}
-                  >
-                    <Sparkles size={16} />
-                    {loading
-                      ? "正在据课解读…"
-                      : report.interpretation
-                        ? "重新生成解读"
-                        : "生成 AI 解读"}
-                  </button>
-                  {health === "unavailable" && (
-                    <p className="muted small">
-                      暂时无法检查服务状态，提交时将再次尝试连接。
-                    </p>
-                  )}
-                </form>
-              )}
-            {apiError && (
-              <p className="error-message" role="alert">
-                {apiError}
-              </p>
-            )}
-          </section>
+          {currentVersion && (
+            <QuestionGuide
+              chart={chart}
+              question={report.question}
+              category={report.category}
+            />
+          )}
+          <AiReading
+            report={report}
+            currentVersion={currentVersion}
+            onUpdate={onUpdate}
+          />
           {chart.time && (
             <details
               className="fold-section"
@@ -584,7 +439,7 @@ export function Result({
       </div>
       <p className="report-footer">
         课号 {chart.id} · 引擎 {chart.engineVersion} · 规则 {chart.ruleVersion}{" "}
-        · 文献 {report.corpusVersion || CORPUS_VERSION}
+        · 文献 {report.corpusVersion || "未记录"}
       </p>
     </div>
   );

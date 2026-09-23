@@ -1,0 +1,65 @@
+{
+  "summary": "本课已按十干寄宫与贼克法完成排盘，三传呈初生中、中生末、末生日干的递生结构，且三传不落旬空，属已核的局部有利条件，可理解为晋升事项存在被引荐、逐层推动的路径。但该条件只描述结构，不能断定今年必然升职；实际结果仍取决于岗位名额、考核口径与决策流程等现实信息。",
+  "observations": [
+    {
+      "kind": "traditional",
+      "text": "三传依次相生并最终生日干，且三传均不旬空，属已核的递生结构，可理解为晋升事项有被逐层引荐、推动的路径。",
+      "factIds": [
+        "day",
+        "transmission-1",
+        "transmission-2",
+        "transmission-3",
+        "voids"
+      ],
+      "evidenceIds": ["bifa-031"],
+      "assessmentIds": ["bifa-031"]
+    },
+    {
+      "kind": "traditional",
+      "text": "四课依十干寄宫建立、三传依贼克法取出，说明排盘步骤已完成；这些步骤只说明盘面如何形成，不能由排盘路径判断升职成败。",
+      "factIds": [
+        "day",
+        "lesson-1",
+        "lesson-2",
+        "lesson-3",
+        "lesson-4",
+        "method",
+        "transmission-1",
+        "transmission-2",
+        "transmission-3"
+      ],
+      "evidenceIds": ["daquan-jigong", "daquan-zeike"],
+      "assessmentIds": ["procedure-jigong", "procedure-transmissions"]
+    },
+    {
+      "kind": "context",
+      "text": "升职通常由名额、考核周期、直属上级评价与更高层审批共同决定，盘面结构无法替代这些现实条件，宜先弄清本年度评审的时间节点与硬性门槛。",
+      "factIds": [],
+      "evidenceIds": [],
+      "assessmentIds": []
+    },
+    {
+      "kind": "context",
+      "text": "递生结构可对应“需要中间环节推动”的情形，现实中可理解为直属上级或跨部门同事的推荐与背书较为关键，宜主动确认谁在评审中为你说话。",
+      "factIds": [],
+      "evidenceIds": [],
+      "assessmentIds": []
+    }
+  ],
+  "advice": [
+    "向直属上级确认本年度晋升的评审时间表、名额与硬性条件。",
+    "整理近一年的可量化业绩与关键项目成果，形成书面材料备用。",
+    "明确评审链条中的关键决策人，请合适的推荐人提前了解你的意愿。",
+    "若本轮未成，问清具体差距项并约定下一评估节点。"
+  ],
+  "missingInformation": [
+    "所在单位今年的晋升名额与评审时间安排是否已明确？",
+    "你的直属上级与更高层对你的晋升持何种态度？",
+    "是否已有可量化的业绩材料或明确的考核标准？"
+  ],
+  "limitations": [
+    "已核传统判断只覆盖递生这一局部结构条件，不是完整占类取用法，不能据此保证升职结果。",
+    "未提供本命与行年，依赖本命、行年的条文未纳入解释。",
+    "程序提示尚有未满足与未适用条件，界面会独立展示，本回答不据此推断吉凶。"
+  ]
+}

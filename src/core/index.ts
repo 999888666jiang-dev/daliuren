@@ -21,8 +21,14 @@ import {
   si,
 } from "./constants";
 import { rules } from "./rules";
+import { resolveCasting } from "./modes";
 
 export { BRANCHES, STEMS, RULE_VERSION, ENGINE_VERSION } from "./constants";
+export {
+  chartStructureSignature,
+  hasEquivalentChart,
+  withPersonalContext,
+} from "./modes";
 export type * from "./types";
 
 function fingerprint(text: string): string {
@@ -196,11 +202,12 @@ export function castManual(input: ManualInput): ChartResult {
 
 export function cast(input: CastInput): ChartResult {
   const c = calendar(input);
+  const casting = resolveCasting(input, c.hourBranch);
   const result = compute({
     dayStem: c.dayStem,
     dayBranch: c.dayBranch,
     monthGeneral: c.monthGeneral,
-    hourBranch: c.hourBranch,
+    hourBranch: casting.virtualHourBranch ?? c.hourBranch,
     daytime: c.daytime,
     natalBranch: input.natalBranch,
     annualBranch: input.annualBranch,
@@ -208,9 +215,27 @@ export function cast(input: CastInput): ChartResult {
   result.id = `dlr-${fingerprint(RULE_VERSION + canonical({ ...input, ruleVersion: RULE_VERSION }))}`;
   result.input = { ...input, ruleVersion: RULE_VERSION };
   result.time = c.time;
+  result.casting = casting;
   result.monthBranch = c.monthBranch;
-  result.trace.unshift(...c.trace);
+  result.trace.unshift(...c.trace, {
+    id: "casting-mode",
+    title: casting.mode === "living" ? "活时报数与真实历法分离" : "正时起课",
+    detail:
+      casting.mode === "living"
+        ? `真实时支${casting.realHourBranch}，用户报数 ${casting.number} 对应虚拟${casting.virtualHourBranch}时，月将加虚拟占时布盘。${casting.notice}`
+        : casting.notice,
+    sourceIds: [],
+  });
   result.facts.push(
+    {
+      id: "casting-mode",
+      label: "起课方式",
+      value:
+        casting.mode === "living"
+          ? `活时报数 ${casting.number} → 虚拟${casting.virtualHourBranch}时；真实${casting.realHourBranch}时，按真实时间取${c.daytime ? "昼" : "夜"}贵；日干支、月将不变（本站口径）`
+          : `正时起课，真实${casting.realHourBranch}时`,
+      sourceIds: [],
+    },
     {
       id: "time-basis",
       label: "时间基准",
@@ -219,6 +244,13 @@ export function cast(input: CastInput): ChartResult {
     },
     { id: "month-branch", label: "月建", value: c.monthBranch, sourceIds: [] },
   );
+  if (casting.mode === "living") {
+    result.profileWarnings.push(casting.notice);
+    if (casting.virtualHourBranch === casting.realHourBranch)
+      result.profileWarnings.push(
+        "本次报数对应的虚拟时支与真实时支相同，因此与同一真实时间的正时课盘一致，这是规则结果，不是故障。",
+      );
+  }
   if (c.time.nearBoundary)
     result.profileWarnings.unshift(
       "本次时间接近时辰、换日或交节边界（两分钟内），请核准输入时间，并查看标准时对照。",

@@ -7,7 +7,13 @@ import {
   timeText,
   type Report,
 } from "../lib/report";
-export function History({ onOpen }: { onOpen: (r: Report) => void }) {
+export function History({
+  onOpen,
+  onChange,
+}: {
+  onOpen: (r: Report) => void;
+  onChange: (reports: Report[]) => void;
+}) {
   const [items, setItems] = useState(readReports);
   const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -68,7 +74,9 @@ export function History({ onOpen }: { onOpen: (r: Report) => void }) {
                       onClick={() => {
                         try {
                           removeReport(r.createdAt);
-                          setItems(readReports());
+                          const remaining = readReports();
+                          setItems(remaining);
+                          onChange(remaining);
                           setPending(null);
                         } catch {
                           setError("无法修改本机存储。");

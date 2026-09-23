@@ -27,7 +27,7 @@ export const STEMS: readonly Stem[] = [
   "癸",
 ];
 export const RULE_VERSION = "daquan-v1.0.0";
-export const ENGINE_VERSION = "0.1.0";
+export const ENGINE_VERSION = "0.2.0";
 export const mod = (n: number, size = 12): number => ((n % size) + size) % size;
 export const branch = (n: number): Branch => BRANCHES[mod(n)];
 export const bi = (b: Branch): number => BRANCHES.indexOf(b);

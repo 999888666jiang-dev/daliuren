@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import { BRANCHES, STEMS, RULE_VERSION, cast, castManual } from "../src/core";
 import type { Branch, ManualInput, Stem } from "../src/core/types";
 
-// The expected transmissions below are transcribed from texts, not generated
-// by this engine. OCR candidates remain explicitly distinct from scan-verified
-// production quotation records (see docs/algorithm.md and evidence manifest).
+// Expected transmissions were read independently from the named source.
+// 23 cases are visually checked scans; two remain text transcriptions and one
+// is an explicit hand calculation. Chart checks do not upgrade quote records.
 const goldenInputs: [string, Stem, Branch, Branch, Branch, string][] = [
   ["重审：丙寅干上午", "丙", "寅", "丑", "子", "辰巳午"],
   ["元首：壬戌干上申", "壬", "戌", "酉", "子", "巳寅亥"],
@@ -44,24 +45,27 @@ interface GoldenSource {
   chapter: string;
   sourceUrl: string;
   scanPage: number | null;
+  scanImages: string[];
   verification: "text-transcription" | "hand-calculated" | "scan-verified";
   locator: string;
   note: string;
 }
 const cuiyanUrl =
-  "https://www.shidianguji.com/book/NCL06574A/chapter/1lytk81lo2b03";
+  "https://commons.wikimedia.org/wiki/File:NCL-06574_六壬粹言.pdf";
 const shehaiUrl =
   "https://www.shidianguji.com/zh/book/SK1599/chapter/1m1g2evjvmoez";
-function cuiyan(chapter: string, locator: string): GoldenSource {
+function cuiyan(chapter: string, locator: string, page: number): GoldenSource {
+  const filename = `cuiyan-${String(page).padStart(3, "0")}.jpg`;
   return {
     work: "六壬粹言",
-    edition: "识典古籍 NCL06574A 电子转录，逐页影印待核",
-    chapter: `卷一·${chapter}`,
-    sourceUrl: cuiyanUrl,
-    scanPage: null,
-    verification: "text-transcription",
+    edition: "国家图书馆 06574 钞本，Commons 完整 PDF 的本地渲染",
+    chapter: `卷一·立课·${chapter}`,
+    sourceUrl: `${cuiyanUrl}?page=${page}`,
+    scanPage: page,
+    scanImages: [`public/sources/${filename}`],
+    verification: "scan-verified",
     locator,
-    note: "预期三传读取原文转录；月将时支有以干上位置人工换算者。未声称影印课例已核。",
+    note: `2026-09-23 逐页目视 library/review/${filename} 中指定日干支、干上或课式条件及完整三传，非以 OCR 匹配升级。原书以干上位置或伏返课式给出时，月将/时支为人工换算的等价位移；不虚构历史公历时刻。核验限此课例，不扩展为整页释义或全书已校。`,
   };
 }
 function daquanScan(page: number, locator: string): GoldenSource {
@@ -71,21 +75,23 @@ function daquanScan(page: number, locator: string): GoldenSource {
     chapter: "卷一·六十日总钤",
     sourceUrl: `https://commons.wikimedia.org/wiki/File:CADAL06054168_六壬大全·卷一.djvu?page=${page}`,
     scanPage: page,
+    scanImages: [`public/sources/daquan-v1-p${page}.jpg`],
     verification: "scan-verified",
     locator,
     note: `直接目视 library/review/daquan-v1-p${page}.jpg 原图，公开副本 public/sources/daquan-v1-p${page}.jpg。格首干支是日干及其上神，小字为日支，大字为三传；月将/时支为人工换算的等价天盘位移。这6例可区分涉害计数是否包含所临起点。`,
   };
 }
 const provenance: GoldenSource[] = [
-  cuiyan("上克下贼先重审", "丙寅干上午，三传辰巳午"),
-  cuiyan("元首课", "壬戌干上申，三传巳寅亥"),
-  cuiyan("克多取用比方知", "阳阳比格：甲戌一课未甲，三传子巳戌"),
+  cuiyan("上克下贼先重审", "PDF25左幅重审课：丙寅日干上午，三传辰巳午", 25),
+  cuiyan("元首课", "PDF26右幅元首课：壬戌日干上申，三传巳寅亥", 26),
+  cuiyan("克多取用比方知", "PDF26左幅阳阳比格：甲戌一课未甲，三传子巳戌", 26),
   {
     work: "六壬大全",
     edition: "识典古籍 SK1599 电子转录，逐页影印待核",
     chapter: "课经·涉害课",
     sourceUrl: shehaiUrl,
     scanPage: null,
+    scanImages: [],
     verification: "text-transcription",
     locator: "正月丁卯日丑时亥将；三传亥酉未",
     note: "计数为辰戊未己戌五重与乙木一重；已有已/己/巳转录讹字，等待影印裁决。",
@@ -96,13 +102,18 @@ const provenance: GoldenSource[] = [
     chapter: "课经·涉害课·缀瑕",
     sourceUrl: shehaiUrl,
     scanPage: null,
+    scanImages: [],
     verification: "text-transcription",
     locator: "六月甲午日辰时午将；三传辰午申",
     note: "原文两候选前行各一重；预期读取转录图文，尚未声称影印已核。",
   },
-  cuiyan("蒿矢课", "丙戌干上寅；亥申巳"),
-  cuiyan("弹射课", "癸未干上子；巳辰卯"),
-  cuiyan("昴星仰视格", "戊寅日三传丑午酉"),
+  cuiyan("蒿矢课", "PDF30右幅：丙戌日干上寅，三传亥申巳", 30),
+  cuiyan("弹射课", "PDF30左幅：癸未日干上子，三传巳辰卯", 30),
+  cuiyan(
+    "昴星仰视格",
+    "PDF31右幅仰视格：戊寅日三传丑午酉；按本段中支上、末干上定义，隐含干上酉与位移+4",
+    31,
+  ),
   {
     work: "六壬大全",
     edition: "CADAL 06054168 规则影像本，课例为项目手算",
@@ -110,21 +121,38 @@ const provenance: GoldenSource[] = [
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:CADAL06054168_六壬大全·卷一.djvu",
     scanPage: 13,
+    scanImages: [],
     verification: "hand-calculated",
     locator: "丁亥、寅将、亥时：天盘酉落午；干上戌、支上寅",
     note: "这是独立手算断言，不宣称该完整课例印于此页；该页仅为昴星算法出处。",
   },
-  cuiyan("刚日别责课", "丙辰干上午；亥午午"),
-  cuiyan("柔日别责课", "丁酉干上巳；丑巳巳（原转录中有己/巳混字）"),
-  cuiyan("顺数三神格", "甲寅三传丑亥亥"),
-  cuiyan("逆数三神格", "丁未支阴丑，三传亥戌戌"),
-  cuiyan("逆数三神格·独足", "己未支上酉，三传酉酉酉"),
-  cuiyan("自任课", "六甲三传寅巳申"),
-  cuiyan("初中二传杜传格", "乙酉辰酉卯"),
-  cuiyan("中传杜传格", "丁卯、己卯、辛卯，卯子午；子卯回刑末取冲"),
-  cuiyan("初中二传杜传格", "壬辰亥辰戌"),
-  cuiyan("无亲课", "丁丑、己丑三传亥未丑"),
-  cuiyan("无亲课", "辛丑三传亥未辰"),
+  cuiyan("刚日别责课", "PDF33左幅：丙辰日干上午一课戌上亥，三传亥午午", 33),
+  cuiyan(
+    "柔日别责课",
+    "PDF34右幅：丁酉日干上巳，三传丑巳巳；以影像订正转录己/巳混字",
+    34,
+  ),
+  cuiyan("顺数三神格", "PDF35左幅：甲寅日干阳亥，顺数得丑，三传丑亥亥", 35),
+  cuiyan("逆数三神格", "PDF36右幅：丁未日支阴丑，逆数得亥，三传亥戌戌", 36),
+  cuiyan(
+    "逆数三神格·独足",
+    "PDF36右幅末段接左幅首行：己未日三传酉酉酉，干支上俱乘酉",
+    36,
+  ),
+  cuiyan("自任课", "PDF38右幅：阳日伏吟无克，六甲日三传寅巳申；甲子属六甲", 38),
+  cuiyan(
+    "干刑杜传格",
+    "PDF39右幅：乙酉日辰酉卯（原测试把本例章名误标为初中二传杜传，已订正）",
+    39,
+  ),
+  cuiyan(
+    "中传杜传格",
+    "PDF40右幅：丁卯、己卯、辛卯三传卯子午；子卯回刑末取冲",
+    40,
+  ),
+  cuiyan("初中二传杜传格", "PDF39左幅末段：壬辰日亥辰戌", 39),
+  cuiyan("无亲课", "PDF41右幅：返吟无克，丁丑、己丑三传亥未丑", 41),
+  cuiyan("无亲课", "PDF41右幅：返吟无克，辛丑日三传亥未辰", 41),
   daquanScan(16, "六甲日上行甲未格，小字辰对应寅未子；干上未为位移+5"),
   daquanScan(17, "六乙日右上乙申格，小字亥卯对应未亥卯；干上申为位移+4"),
   daquanScan(19, "六丁日右下丁亥格，小字亥卯对应未亥卯；干上亥为位移+4"),
@@ -142,6 +170,28 @@ export const GOLDEN_CASES = goldenInputs.map(
 );
 
 describe("independent classical and hand-checked examples", () => {
+  it("links each scan-verified chart to an actual reviewed page manifest record", () => {
+    const manifest = JSON.parse(
+      readFileSync("library/verified-pages.json", "utf8"),
+    ) as {
+      pages: { path: string; scanPage: number; sourceId: string }[];
+    };
+    const reviewed = GOLDEN_CASES.filter(
+      (entry) => entry.source.verification === "scan-verified",
+    );
+    expect(reviewed).toHaveLength(23);
+    for (const entry of reviewed) {
+      expect(entry.source.scanImages.length, entry.name).toBeGreaterThan(0);
+      for (const image of entry.source.scanImages) {
+        const record = manifest.pages.find((page) => page.path === image);
+        expect(record, entry.name).toBeDefined();
+        expect(record!.scanPage, entry.name).toBe(entry.source.scanPage);
+        expect(record!.sourceId).toBe(
+          entry.source.work === "六壬粹言" ? "cuiyan" : "daquan-v1",
+        );
+      }
+    }
+  });
   it.each(GOLDEN_CASES)("$name", ({ name, input, expected, source }) => {
     const chart = castManual(input);
     expect(chart.transmissions.map((t) => t.branch).join(""), name).toBe(
@@ -150,6 +200,31 @@ describe("independent classical and hand-checked examples", () => {
     expect(source.sourceUrl.startsWith("https://")).toBe(true);
     expect(source.locator.length).toBeGreaterThan(0);
   });
+  it.each([
+    ["贼克", 0],
+    ["比用", 2],
+    ["涉害", 20],
+    ["遥克", 5],
+    ["昴星", 7],
+    ["别责", 9],
+    ["八专", 11],
+    ["伏吟", 14],
+    ["返吟", 18],
+  ] as const)(
+    "has an independently scan-verified expected chart for %s",
+    (method, index) => {
+      // Explicit method labels and source-read answers, rather than merely
+      // collecting whatever methods the engine happens to produce.
+      const example = GOLDEN_CASES[index];
+      expect(example.source.verification).toBe("scan-verified");
+      expect(example.source.scanImages.length).toBeGreaterThan(0);
+      const chart = castManual(example.input);
+      expect(chart.method.name).toBe(method);
+      expect(chart.transmissions.map((t) => t.branch).join("")).toBe(
+        example.expected,
+      );
+    },
+  );
   it("keeps the first lesson lower as a stem, including its different element", () => {
     const chart = castManual({
       dayStem: "癸",

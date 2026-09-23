@@ -5,6 +5,15 @@ import type {
   EvidenceRecord,
   Interpretation,
 } from "../core/types";
+import type {
+  AiMeta,
+  CategoryChoice,
+  IntentAssessment,
+  InterpretationV2,
+  RuleAssessment,
+} from "../ai/types";
+import { normalizeReport } from "./report-validation";
+export { normalizeReport } from "./report-validation";
 export const categories: { id: Category; label: string; long: string }[] = [
   { id: "career", label: "事业", long: "求职事业" },
   { id: "business", label: "合作", long: "交易合作" },
@@ -14,7 +23,9 @@ export const categories: { id: Category; label: string; long: string }[] = [
   { id: "general", label: "其他", long: "其他事项" },
 ];
 export interface Report {
-  schemaVersion: 1;
+  schemaVersion: 2;
+  id: string;
+  categoryChoice: CategoryChoice;
   question: string;
   category: Category;
   place: string;
@@ -23,10 +34,23 @@ export interface Report {
   comparison?: ChartResult;
   evidenceSnapshot?: EvidenceRecord[];
   corpusVersion?: string;
-  interpretation?: Interpretation;
-  aiMeta?: Record<string, string>;
+  intent?: IntentAssessment;
+  clarificationAnswers?: Record<string, string>;
+  assessments?: RuleAssessment[];
+  interpretation?: InterpretationV2;
+  legacyInterpretation?: Interpretation;
+  aiMeta?: Record<string, string> | AiMeta;
+  warnings?: string[];
+  consultation?: {
+    mode: "standard" | "living" | "reuse" | "manual";
+    matterId: string;
+    parentReportId?: string;
+    sourceChartReportId?: string;
+    changeNote?: string;
+  };
 }
-const key = "guanxiang.reports.v1";
+const legacyKey = "guanxiang.reports.v1";
+const key = "guanxiang.reports.v2";
 export function nowBeijing() {
   return new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 19);
 }
@@ -34,46 +58,98 @@ export function timeText(value: string) {
   return value.replace("T", " ").slice(0, 19);
 }
 export function readReports(): Report[] {
-  try {
-    const items: unknown = JSON.parse(localStorage.getItem(key) || "[]");
-    if (!Array.isArray(items)) return [];
-    return items
-      .filter(
-        (r): r is Report =>
-          r?.schemaVersion === 1 &&
-          typeof r.question === "string" &&
-          typeof r.createdAt === "string" &&
-          typeof r.chart?.id === "string" &&
-          Array.isArray(r.chart?.transmissions) &&
-          Array.isArray(r.chart?.facts) &&
-          Array.isArray(r.chart?.lessons) &&
-          Array.isArray(r.chart?.trace) &&
-          Array.isArray(r.chart?.heavenPlate) &&
-          categories.some((c) => c.id === r.category),
-      )
-      .slice(0, 30);
-  } catch {
-    return [];
+  const combined = new Map<string, Report>();
+  for (const storageKey of [legacyKey, key]) {
+    try {
+      for (const item of readStored(storageKey)) {
+        const normalized = normalizeReport(item);
+        if (normalized) combined.set(normalized.createdAt, normalized);
+      }
+    } catch {
+      /* A broken key must not hide valid reports in the other version. */
+    }
   }
+  return [...combined.values()]
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    .slice(0, 30);
+}
+function readStored(storageKey: string): unknown[] {
+  const raw = localStorage.getItem(storageKey);
+  if (!raw) return [];
+  const items: unknown = JSON.parse(raw);
+  if (!Array.isArray(items))
+    throw new Error("历史记录格式无效；请先导出当前报告。");
+  return items;
+}
+export function serializeReport(report: Report): string {
+  const normalized = normalizeReport(report);
+  if (!normalized) throw new Error("报告未通过格式校验，无法保存或导出。");
+  return JSON.stringify(normalized, null, 2);
 }
 export function saveReport(report: Report) {
-  const items = readReports().filter((r) => r.createdAt !== report.createdAt);
-  localStorage.setItem(key, JSON.stringify([report, ...items].slice(0, 30)));
-}
-export function removeReport(createdAt: string) {
+  const normalized = normalizeReport(report);
+  if (!normalized) throw new Error("报告未通过格式校验，无法保存。");
+  // Read strictly before writing. If storage fails, keep the unsaved report in the caller.
+  const items = readStored(key)
+    .map(normalizeReport)
+    .filter(
+      (item): item is Report =>
+        item !== null && item.createdAt !== normalized.createdAt,
+    );
   localStorage.setItem(
     key,
-    JSON.stringify(readReports().filter((r) => r.createdAt !== createdAt)),
+    JSON.stringify(
+      [normalized, ...items]
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+        .slice(0, 30),
+    ),
   );
 }
+export function removeReport(createdAt: string) {
+  const before = [key, legacyKey].map((storageKey) => ({
+    storageKey,
+    raw: localStorage.getItem(storageKey),
+    items: readStored(storageKey),
+  }));
+  const written: typeof before = [];
+  try {
+    for (const item of before) {
+      if (item.raw === null) continue;
+      localStorage.setItem(
+        item.storageKey,
+        JSON.stringify(
+          item.items.filter(
+            (r) =>
+              !(
+                r &&
+                typeof r === "object" &&
+                "createdAt" in r &&
+                r.createdAt === createdAt
+              ),
+          ),
+        ),
+      );
+      written.push(item);
+    }
+  } catch {
+    for (const item of written) {
+      try {
+        localStorage.setItem(item.storageKey, item.raw!);
+      } catch {
+        /* Report the failure; do not hide it. */
+      }
+    }
+    throw new Error("无法修改本机存储，当前报告仍可导出。");
+  }
+}
 export function exportReport(report: Report) {
-  const blob = new Blob([JSON.stringify(report, null, 2)], {
+  const blob = new Blob([serializeReport(report)], {
     type: "application/json;charset=utf-8",
   });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `guanxiang-${report.chart.id}.json`;
+  a.download = `guanxiang-${normalizeReport(report)!.chart.id.replace(/[^a-zA-Z0-9_-]/gu, "_")}.json`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

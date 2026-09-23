@@ -1,19 +1,16 @@
 {
   "name": "daliuren",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "preview": "vite preview --host 127.0.0.1",
-    "worker:dev": "wrangler dev",
-    "worker:deploy": "wrangler deploy",
-    "worker:typecheck": "tsc -p tsconfig.worker.json",
-    "invite": "node scripts/invite.mjs",
-    "format": "prettier --write src worker tests docs *.json *.ts .github/workflows/*.yml",
-    "format:check": "prettier --check src worker tests"
+    "format": "prettier --write src tests docs *.json *.ts .github/workflows/*.yml",
+    "format:check": "prettier --check src tests",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",
@@ -23,15 +20,15 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20260922.1",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.0",
     "prettier": "3.9.8",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.0",
     "vite": "^7.1.0",
-    "vitest": "^3.2.0",
-    "wrangler": "^4.0.0"
+    "vitest": "^3.2.0"
   }
 }

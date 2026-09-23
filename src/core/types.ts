@@ -16,9 +16,12 @@ export type Stem =
 export type Category =
   "career" | "business" | "relationship" | "travel" | "lost" | "general";
 export type TimeBasis = "solar" | "standard";
+export type CastMode = "standard" | "living";
 export interface CastInput {
   datetime: string;
   timeBasis: TimeBasis;
+  castMode?: CastMode;
+  livingNumber?: number;
   latitude?: number;
   longitude?: number;
   natalBranch?: Branch;
@@ -70,6 +73,13 @@ export interface ChartFact {
   value: string;
   sourceIds: string[];
 }
+export interface CastingContext {
+  mode: CastMode;
+  realHourBranch: Branch;
+  virtualHourBranch?: Branch;
+  number?: number;
+  notice: string;
+}
 export interface ChartResult {
   id: string;
   engineVersion: string;
@@ -77,6 +87,7 @@ export interface ChartResult {
   input?: CastInput;
   manualInput?: ManualInput;
   time?: TimeContext;
+  casting?: CastingContext;
   day: { stem: Stem; branch: Branch };
   monthGeneral: Branch;
   monthBranch?: Branch;

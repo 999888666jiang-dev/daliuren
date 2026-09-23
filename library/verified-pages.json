@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-23.1",
+  "version": "2026-09-23.2",
   "verificationMethod": "Visual comparison with actual scan; punctuation editorial. No OCR match automatically grants verified status.",
   "pages": [
     {
@@ -309,8 +309,185 @@
       "sha256": "0d576dcf3f49f0110e4f81072836ab34fce7f3b8d552b2c9362324e8c6dcae6f",
       "reviewedAt": "2026-09-23",
       "reviewer": "Codex source_audit and rule_audit, independent visual comparison",
-      "reviewScope": "左页卷一立课叶十九，逐干昼夜贵人表五句",
+      "reviewScope": "左页卷一立课叶十九，逐干昼夜贵人表五句；右幅无亲课丁丑/己丑=亥未丑，辛丑=亥未辰（2026-09-23新增目视课例核验）",
       "scopeWarning": "Only these table sentences are verified; not the whole book."
+    },
+    {
+      "path": "public/sources/cuiyan-025.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 25,
+      "sha256": "c07bddccf7a091bc18088d9ed4039bd4b99c666711f6a95cede8829010805b5b",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "重审课丙寅干上午：三传辰巳午（左幅）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-026.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 26,
+      "sha256": "e636b3067630399731eefe692108859e12d1bfa1f5e2adb527e8a35d1424a370",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "元首课壬戌干上申：巳寅亥（右）；阳阳比格甲戌一课未甲：子巳戌（左）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-030.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 30,
+      "sha256": "119ec8513ba467657f78cf662323aec70ef6671b7e39f97ec7d83d11d5078967",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "蒿矢丙戌干上寅：亥申巳（右）；弹射癸未干上子：巳辰卯（左）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-031.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 31,
+      "sha256": "1ee649c77b62b2db8b5530d0f976945139daffc1e9bb87f750b2c9607b930187",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "昴星仰视格戊寅日：丑午酉，日上酉、支上午（右）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-033.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 33,
+      "sha256": "c038d0ffacf84f936f871b8e775a495a5edec99b144a8f157ad01b88a8673503",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "刚日别责丙辰干上午：亥午午（左）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-034.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 34,
+      "sha256": "c7acf47c3337cac4b7519ff99bb5270cc083ff34339cbc41bde05b536057bdc6",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "柔日别责丁酉干上巳：丑巳巳（右），订正电子转录己/巳混字",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-035.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 35,
+      "sha256": "f5286d51a7941aaf20f72cbe34e2bf4bba09049518650385070d80bb3961dbe4",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "顺数三神格甲寅干阳亥：丑亥亥（左）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-036.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 36,
+      "sha256": "9dcfc5a50b9b2ed147f9173cae0c57913ad18f3c5a7e7d8b245d15c5d279f643",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "逆数三神丁未支阴丑：亥戌戌（右）；己未独足酉酉酉、干支俱乘酉（右末接左首）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-038.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 38,
+      "sha256": "3cdbdea5e46385c49051d163ed752ca95254f653f1a44143e2e4c721ae810951",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "自任课六甲伏吟：寅巳申（右），适用甲子测试例",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-039.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 39,
+      "sha256": "1b3fe8bbb9738770b54fc960a4a02cf4d3a426bb0721518b9d630934adde4b32",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "干刑杜传乙酉：辰酉卯（右）；初中二传杜传壬辰：亥辰戌（左）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    },
+    {
+      "path": "public/sources/cuiyan-040.jpg",
+      "sourceId": "cuiyan",
+      "scanPage": 40,
+      "sha256": "7d392bbfba8c8b4e4cc0695b6fa0a342c74686eea30a2f42b100af6789295ca4",
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "中传杜传丁卯/己卯/辛卯：卯子午（右）",
+      "scopeWarning": "Only the named worked examples and necessary input conditions were visually reviewed. Equivalent month-general/hour rotations are hand conversions, not historical timestamps. No whole-page or whole-book transcription is claimed."
+    }
+  ],
+  "externalCalendarChecks": [
+    {
+      "id": "hko2025-12",
+      "url": "https://www.hko.gov.hk/en/gts/astron2025/files/2025cal12.pdf",
+      "sourceBytes": 1015391,
+      "sourceSha256": "706f79786aca135b6ac7d0a4cc5d1088001f2abb619e1a47c318d59fe37293a7",
+      "page": 1,
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "表头2025年12月；31日甲戌；冬至12月21日23:03",
+      "method": "Official single-page PDF rendered with Poppler and visually inspected; static expected values transcribed into tests/core-calendar.test.ts.",
+      "storage": "Temporary read-only research copy; original and rendered page are not redistributed in the website or counted in the seven-file ancient corpus.",
+      "scopeWarning": "Only named cells and headers verified. Civil-date names do not establish the project 23:00 divination convention. Published minute precision is not second-level accuracy."
+    },
+    {
+      "id": "hko2026-01",
+      "url": "https://www.hko.gov.hk/en/gts/astron2026/files/2026cal01.pdf",
+      "sourceBytes": 835516,
+      "sourceSha256": "f1bd54cb5754a2d5cf2426943401052e139815dd1900c04d8e44466cb8edd4b6",
+      "page": 1,
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "表头2026年1月；1日乙亥、2日丙子；小寒5日16:23、大寒20日09:45",
+      "method": "Official single-page PDF rendered with Poppler and visually inspected; static expected values transcribed into tests/core-calendar.test.ts.",
+      "storage": "Temporary read-only research copy; original and rendered page are not redistributed in the website or counted in the seven-file ancient corpus.",
+      "scopeWarning": "Only named cells and headers verified. Civil-date names do not establish the project 23:00 divination convention. Published minute precision is not second-level accuracy."
+    },
+    {
+      "id": "hko2026-09",
+      "url": "https://www.hko.gov.hk/en/gts/astron2026/files/2026cal09.pdf",
+      "sourceBytes": 1028798,
+      "sourceSha256": "3f6801113f11169aebc156923ca45a1b2cbcfe67a5bff535be02f91a54fc517b",
+      "page": 1,
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "表头2026年9月；22日己亥、23日庚子；白露7日22:41、秋分23日08:05",
+      "method": "Official single-page PDF rendered with Poppler and visually inspected; static expected values transcribed into tests/core-calendar.test.ts.",
+      "storage": "Temporary read-only research copy; original and rendered page are not redistributed in the website or counted in the seven-file ancient corpus.",
+      "scopeWarning": "Only named cells and headers verified. Civil-date names do not establish the project 23:00 divination convention. Published minute precision is not second-level accuracy."
+    },
+    {
+      "id": "cwa2025suntr",
+      "url": "https://www.cwa.gov.tw/Data/astronomy/2025suntr.pdf",
+      "sourceBytes": 204643,
+      "sourceSha256": "6a68b26bd3c63d71f92cccecb589bda8f20221b0119e42447d7a5fb539e29ea1",
+      "page": 1,
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "表头民国114年/2025、东经120度中天平时；仅核12月31日12:02:56",
+      "method": "Official single-page PDF rendered with Poppler and visually inspected; static expected values transcribed into tests/core-calendar.test.ts.",
+      "storage": "Temporary read-only research copy; original and rendered page are not redistributed in the website or counted in the seven-file ancient corpus.",
+      "scopeWarning": "Only named cells and headers verified. Civil-date names do not establish the project 23:00 divination convention. Published minute precision is not second-level accuracy."
+    },
+    {
+      "id": "cwa2026suntr",
+      "url": "https://www.cwa.gov.tw/Data/astronomy/2026suntr.pdf",
+      "sourceBytes": 200350,
+      "sourceSha256": "19fe4317cd9812d8526d99d544348b54d9bdee7fe91e6a0b5ea98a6c4bb7d4ff",
+      "page": 1,
+      "reviewedAt": "2026-09-23",
+      "reviewer": "Codex source_audit",
+      "reviewScope": "表头民国115年/2026、东经120度中天平时；仅核1月1日12:03:24、2月11日12:14:11、9月22日11:52:49、9月23日11:52:28、11月4日11:43:33、12月31日12:02:49",
+      "method": "Official single-page PDF rendered with Poppler and visually inspected; static expected values transcribed into tests/core-calendar.test.ts.",
+      "storage": "Temporary read-only research copy; original and rendered page are not redistributed in the website or counted in the seven-file ancient corpus.",
+      "scopeWarning": "Only named cells and headers verified. Civil-date names do not establish the project 23:00 divination convention. Published minute precision is not second-level accuracy."
     }
   ]
 }

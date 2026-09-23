@@ -1,0 +1,72 @@
+{
+  "summary": "现有课盘只确认了排盘步骤：四课按寄宫建立，三传按贼克取出。几条已核的吉凶类条件均未满足，因此不能据此判断转岗必成或必败。面试邀请是现实中的积极信号，但能否转成产品岗，仍取决于你的产品能力证据、面试表现和对方岗位要求，建议按可核查的准备清单推进。",
+  "observations": [
+    {
+      "kind": "traditional",
+      "text": "四课依十干寄宫规则建立：日干庚上见未，未上午，子上亥，亥上戌。这属于排盘程序，说明课体如何搭起，不能由此推出转岗吉凶。",
+      "factIds": ["day", "lesson-1", "lesson-2", "lesson-3", "lesson-4"],
+      "evidenceIds": ["daquan-jigong"],
+      "assessmentIds": ["procedure-jigong"]
+    },
+    {
+      "kind": "traditional",
+      "text": "本课无下贼，取一上克下，按贼克法得初传戌、中传酉、末传申。取传法只说明算法路径，口诀本身不是对所问事情的吉凶断语。",
+      "factIds": [
+        "method",
+        "transmission-1",
+        "transmission-2",
+        "transmission-3"
+      ],
+      "evidenceIds": ["daquan-zeike"],
+      "assessmentIds": ["procedure-transmissions"]
+    },
+    {
+      "kind": "traditional",
+      "text": "已核的几项吉凶类条件均未满足：日上神旬空乘天空的组合不成立，三传递生链不完整，三传连环克日干的结构也不成立。因此这些条文不能作为支持或否定转岗的肯定依据。",
+      "factIds": [
+        "day",
+        "lesson-1",
+        "transmission-1",
+        "transmission-2",
+        "transmission-3",
+        "voids"
+      ],
+      "evidenceIds": ["bifa-016", "bifa-031", "bifa-032"],
+      "assessmentIds": ["bifa-016", "bifa-031", "bifa-032"]
+    },
+    {
+      "kind": "traditional",
+      "text": "递生遇空这一条同样未满足完整条件，且年命填实部分尚未判定。即便补充本命或行年，也不能据此断定转岗必败，只能视为条件未齐。",
+      "factIds": [
+        "day",
+        "transmission-1",
+        "transmission-2",
+        "transmission-3",
+        "voids"
+      ],
+      "evidenceIds": ["bifa-031-void"],
+      "assessmentIds": ["bifa-031-void"]
+    },
+    {
+      "kind": "context",
+      "text": "就现实层面看，已有一次面试邀请说明简历与岗位存在初步匹配，但三个月内能否完成转岗，取决于你能否用作品、数据或项目经历证明产品判断力，以及对方是否愿意接受运营背景的候选人。",
+      "factIds": ["time-basis", "month-branch"]
+    }
+  ],
+  "advice": [
+    "把运营经历改写成产品语言：列出你主导过的需求、取舍依据和上线后的量化结果，形成一页案例。",
+    "面试前研究该岗位的产品线、用户与竞品，准备三个能体现优先级判断和跨团队协作的具体问题。",
+    "向对方确认岗位职责、汇报关系、考核指标与转岗试用安排，判断是否与你的能力积累方向一致。",
+    "并行投递同类产品岗，用两到三周对比面试反馈，避免把单一邀请当作唯一机会。"
+  ],
+  "missingInformation": [
+    "你的产品相关项目、作品或课程经历",
+    "该岗位的职级、职责范围与团队情况",
+    "你所在公司内部转岗政策或外部求职的时间约束"
+  ],
+  "limitations": [
+    "课盘仅确认排盘与取传步骤，已核吉凶条件均未满足，不能据此预测转岗成败。",
+    "未提供本命与行年，依赖年命的条文未纳入判断。",
+    "本解释不构成对录用结果、薪资或职业收益的保证，现实决策请以实际沟通与资料为准。"
+  ]
+}
